@@ -1,0 +1,89 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Course Details</h1>
+        <h3>image:</h3>
+            <input type="file" />
+        <h3>Name:</h3>
+        <p>CS4550 12631 Web Development SEC 01 FALL 2023</p>
+        <h3>Couse Code:</h3>
+        <p>CS4500.12631.202410</p>
+        <h3>Blueprint Course:</h3>
+        <p>No</p>
+        <h3>Course Template</h3>
+            <input type="checkbox" value="Yes" id="radio-Template"/>
+            <label for="radio-Template">Enable course as a Course Template</label>
+        <h3>Time Zone:</h3>
+        <select>
+            <option>Eastern Time(-5:00/-04:00)</option>
+        </select>
+        <h3>SIS ID:</h3>
+        <p>CS4550.12631.202410</p>
+        <h3>Subaccount:</h3>
+        <p>CS Undergrad</p>
+        <h3>Term:</h3>
+        <p>202410_1 Fall 2023 Semster Full Term</p>
+        <h3>Participation:</h3>
+        <select>
+            <option>Term</option>
+        </select>
+        <p>Course participation is limited to term start and end dates.</p>
+        <label>Start</label>
+        <input type="date" value="2020-09-01">
+        <br />
+        <label>End</label>
+        <input type="date" value="2020-09-01">
+        <br />
+        <input type="checkbox" value="Yes" id="checkbox-start"/>
+        <label for="checkbox-start">Restrict students from viewing course before term start date</label>
+        <br />
+        <input type="checkbox" value="Yes" id="checkbox-end"/>
+        <label for="checkbox-end">Restrict students from viewing course before term end date</label>
+        <h3>Default due time:</h3>
+        <select>
+            <option>Account default(11:59pm)</option>
+        </select>
+        <p>This influences the user interface for setting due dates. It does not change the time due for any existing assignments.</p>
+        <h3>Langusge:</h3>
+        <select>
+            <option>Not set</option>
+        </select>
+        <p>This will override any user/system language preferences.</p>
+        <h3>File Storage:</h3>
+        <p>10000 megabytes</p>
+        <h3>Large Course:</h3>
+        <input type="checkbox" value="Yes" id="checkbox-Large-Course"/>
+        <label for="checkbox-Large-Course">Launch SpeedGrader Filtered by Student Group</label>
+        <h3>Grading Scheme:</h3>
+        <input type="checkbox" value="Yes" id="checkbox-Grading-Scheme"/>
+        <label for="checkbox-Grading-Scheme">Enable course grading scheme</label>
+        <h3>License:</h3>
+        <select>
+            <option>Private</option>
+        </select>
+        <h3>File Copyright:</h3>
+        <input type="checkbox" value="Yes" id="checkbox-File-Copyright"/>
+        <label for="checkbox-File-Copyright">Copyright and license information must be provided for files before they are published.</label>
+        <h3>Visibility:</h3>
+        <p>If you need to make your course public please contact your administratour/support.</p>
+        <select>
+            <option>Course</option>
+        </select>
+        <br /><br />
+        <input type="checkbox" value="Yes" id="checkbox-Visibility"/>
+        <label for="checkbox-Visibility">Include this course in the public course index</label>
+        <h3>Format:</h3>
+        <select>
+            <option>On-Campus</option>
+        </select>
+        <h3>Mastery Paths:</h3>
+        <input type="checkbox" value="Yes" id="checkbox-Mastery-Paths"/>
+        <label for="checkbox-Mastery-Paths">Enable individual learning paths for students based n assessment</label>
+        <h3>Description:</h3>
+        <textarea></textarea>
+        <br />
+        <button>more options</button>
+        <br /><br />
+        <button>Update Course Details</button>
+    </body>
+</html>

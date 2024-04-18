@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Home/index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.css"
+        rel="stylesheet"/>
+    <link rel="stylesheet" href="/Kanbas/Courses/Modules/index.css" />
+  </head>
+  <body>
+    
+    <!-- Implement links to Kanbas and Course Navigation -->
+    <div class="d-flex">
+      <div class="d-md-block">
+        <ul class="wd-kanbas-navigation">
+            <li><a href="/Kanbas/Account/Profile/screen.html">
+                <i class="fa-solid fa-circle-user" style="color: #b8b8b8;"></i>Account</a>
+            </li>
+            <li>
+             <a href="/Kanbas/Dashboard/screen.html">
+                <i class="fa fa-gauge" style="color: #ff0000;"></i>Dashboard</a>
+            </li>
+            <li  class="wd-active">
+             <a href="/Kanbas/Courses/Home/screen.html"><i class="fa fa-book" style="color: #ff0000;"></i>Courses</a>
+            </li>
+            <li>
+             <a href="#"><i class="fa fa-calendar-days" style="color: #ff0000;"></i>Calendar</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-inbox" style="color: #ff0000;"></i><br>Inbox</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa-regular fa-clock" style="color: #ff0000;"></i>History</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-display" style="color: #ff0000;"></i>Studio</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #ff0000;"></i>Commons</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa-regular fa-circle-question" style="color: #ff0000;"></i> <br>Help  </a>
+               </li>
+         </ul>
+      </div>
+
+     <div class="d-md-block">
+           <ul class="wd-navigation">
+            <li>
+              <a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+            <li>
+              <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
+            </li>
+            <li><a href="http://piazza.com">Piazza</a></li>
+            <li><a href="#">Zoom</a></li>
+            <li>
+              <a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a>
+            </li>
+            <li><a href="#">Quizzes</a></li>
+            <li   class="wd-active"><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+            <li><a href="#">People</a></li>
+            <li>
+              <a href="/Kanbas/Courses/Settings/Course Details/screen.html">Settings</a>
+          </li>
+          </ul>
+     </div>
+
+
+
+
+
+      <div class="flex-fill">
+
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">CS5610.Spring.section</li>    
+              <li class="breadcrumb-item active" aria-current="page">Grades</li>
+            </ol>
+        </nav>
+        <hr>
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <button class="btn btn-outline-secondary m-1" type="button">
+                        <i class="fa fa-file-import" style="color: #000000;"></i> Import
+                    </button>
+                    <button class="btn btn-outline-secondary m-1" type="button">
+                        <i class="fa fa-file-export" style="color: #000000;"></i> Export ▼
+                    </button>
+                    <button class="btn btn-outline-secondary m-1" type="button">
+                        <i class="fa fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="searchStudents" class="fw-bold">Student Names</label>
+                    <div class="input-group p-1">
+                        <input type="search" id="searchStudents" class="form-control" placeholder="Search Students">
+                        <div class="input-group-append ">      
+                            <button class="btn btn-outline-secondary" type="button">▼</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="searchAssignments" class="fw-bold">Assignment Names</label>
+                    <div class="input-group p-1">
+                        <input type="search" id="searchAssignments" class="form-control" placeholder="Search Assignments">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">▼</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <button class="btn btn-outline-secondary mr-2" type="button">
+                        <i class="fa fa-filter"></i> Apply Filters
+                    </button>
+                </div>
+            </div>
+        
+        </div>
+
+
+        <div class="container mt-3">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+
+                <colgroup>
+                    <col style="width: 25%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;"> 
+                    <col style="width: 20%;">
+                  </colgroup>
+
+                <tbody>
+                  <tr>
+                    <th>Student Name</th>
+                    <th>A1 SETUP <br> Out of 100</th>
+                    <th>A2 HTML <br> Out of 100</th>
+                    <th>A3 CSS <br> Out of 100</th>
+                    <th>A4 BOOTSTRAP <br> Out of 100</th>
+                  </tr>            
+                  <tr>
+                      <td style="color: red;">Doxa Asibey</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>
+                      <input type="text" class="form-control" value="89.59%"/>
+                    </td>
+                    <td>98.65%</td>
+                  </tr>
+                  <tr>
+                    <td style="color: red;">Thuy Tien Bui</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td style="background-color: #ADD8E6;">91.5%</td>
+                    <td>100%</td>
+                  </tr>
+                  <tr>
+                    <td style="color: red;">Chen</td>
+                    <td>99.5%</td>
+                    <td>95%</td>
+                    <td>91.5%</td>
+                    <td>100%</td>
+                  </tr>
+                  <tr>
+                    <td style="color: red;">Chien</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>91.5%</td>
+                    <td>98%</td>
+                  </tr>
+                  <tr>
+                    <td style="color: red;">Basil</td>
+                    <td>99.5%</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>88%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+</div>
+
+
+      
+    </div>
+  </body>
+</html>

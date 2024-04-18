@@ -1,0 +1,16 @@
+.box {
+    border: 2px solid red;
+    padding: 10px;
+  }
+  
+  .box ul li {
+    background-color: yellow;
+  }
+
+  #qwe { 
+    color: blue; 
+  }
+  
+  .asd { 
+    color: red; 
+  }

@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.css"
+        rel="stylesheet"/>
+        <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    </head>
+    <body>                              
+                  <div class="d-flex">
+                      <div class="d-md-block">
+                        <ul class="wd-kanbas-navigation">
+                            <li><a href="/Kanbas/Account/Profile/screen.html">
+                                <i class="fa-solid fa-circle-user" style="color: #b8b8b8;"></i>Account</a>
+                            </li>
+                            <li>
+                             <a href="/Kanbas/Dashboard/screen.html">
+                                <i class="fa fa-gauge" style="color: #ff0000;"></i>Dashboard</a>
+                            </li>
+                            <li class="wd-active">
+                             <a href="/Kanbas/Courses/Home/screen.html"><i class="fa fa-book" style="color: #ff0000;"></i>Courses</a>
+                            </li>
+                            <li>
+                             <a href="#"><i class="fa fa-calendar-days" style="color: #ff0000;"></i>Calendar</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-inbox" style="color: #ff0000;"></i><br>Inbox</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa-regular fa-clock" style="color: #ff0000;"></i>History</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-display" style="color: #ff0000;"></i>Studio</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #ff0000;"></i>Commons</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa-regular fa-circle-question" style="color: #ff0000;"></i> <br>Help  </a>
+                               </li>
+                         </ul>   
+                    </div>
+                        
+                           
+                      <div class="d-md-block">
+                        <ul class="wd-navigation ">
+                            <li>
+                              <a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+                            <li>
+                              <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
+                            </li>
+                            <li><a href="http://piazza.com">Piazza</a></li>
+                            <li><a href="#">Zoom</a></li>
+                            <li class="wd-active">
+                              <a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a>
+                            </li>
+                            <li><a href="#">Quizzes</a></li>
+                            <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+                            <li><a href="#">People</a></li>
+                            <li>
+                              <a href="/Kanbas/Courses/Settings/Course Details/screen.html">Settings</a>
+                          </li>
+                          </ul>
+                      </div>
+                   
+
+                    <div class="flex-fill">                  
+                      <div class="p-2">
+                        <form action="/Kanbas/Courses/Assignments/screen.html">                
+                          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item">CS5610.Spring.section</li>
+                              <li class="breadcrumb-item"><a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">A1 ENV</li>
+                            </ol>
+                          </nav>
+                            <hr>
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-md-2">
+                                <select class="form-control">
+                                  <option>Speed Grader</option>
+                                </select>
+                              </div>
+                            </div>
+                          
+                            <hr />
+                            <h5 class="p-2">Assignment Name</h5>
+                            <input class="form-control" value = "A1 -HTML" />
+                            <br/>
+                            <textarea class="form-control">This is the assignment description:An Assignment describes the task or project requirements, guiding individuals on what needs to be accomplished. It serves as a directive outlining expectations and objectives for successful completion.</textarea>
+                            <br/>
+                           <br/>
+
+                           <div class="row">
+                           <div class="d-flex col-md-6">
+                            <label class="p-2" for="points">Points</label>
+                            <input class="form-control" id="points" value="100" /></div>
+                           
+                          </div>
+                          <br/>
+
+                          <div class="row">
+                           <div class="d-flex col-md-6">
+                            <label class="p-2">Assignment Group</label>
+                            <select class="form-control">
+                                <option>ASSIGNMENT</option>
+                                <option>QUIZ</option>
+                                <option>EXAM</option>
+                                <option>PROJECT</option>
+                            </select></div></div>
+                          </div>
+
+
+
+                            <br />
+                            <br />
+                            <label class="p-2">Online Entry Options</label><br />
+                            <label><input  type ="checkbox" name="online-entry-options"/>Text Entry</label><br />
+                            <label><input  type ="checkbox" name="online-entry-options"/>Website URL</label><br />
+                            <label><input   type ="checkbox" name="online-entry-options"/>Media Recording</label><br />
+                            <label><input  type ="checkbox" name="online-entry-options"/>Student Annotations</label><br />
+                            <br/>
+                            <br/>
+                            
+                            <legend class="pull-left col-auto p-2">Assign</legend>
+                            <style>
+                                fieldset {
+                                  border: 1px solid #ccc;
+                                  border-radius: 5px;
+                                  padding: 10px;
+                                  margin-bottom: 20px;
+                                }
+                              
+                                legend {  
+                                  font-size: 1em; /* Adjust the font size as needed */
+                                }
+                              
+                                .form-group label {
+                                  font-weight: bold;
+                                  font-size: 1.1em; /* Adjust the font size as needed */
+                                }
+                              </style>
+                              
+                              <fieldset class="col-md-8">
+                               
+                                <div class="form-group ">
+                                  <label for="assign">Assign to</label><br />
+                                  <input class="form-control" id="assign" value="Everyone">
+                                  <br/>
+                                </div>
+                              
+                                <div class="form-group">
+                                  <label>Due Date</label><br />
+                                  <input class="form-control" type="date" value="2020-09-01">
+                                  <br/>
+                                </div>
+
+                                <div class="form-group">
+
+                                  
+                                <div class="row">
+                                <div class="col-md-4">
+                                  <label>Available from</label><br />
+                                  <input class="form-control" type="date" value="2020-09-01">
+                                  <br/>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Until</label><br />
+                                  <input class="form-control" type="date" value="2020-09-01">
+                                  <br/>
+                                </div>
+                                </div>                                             
+                              </div></fieldset>
+                              <div class="d-flex justify-content-center">
+                            <button class="btn btn-success pull-right m-2">Cancel</button>
+                            <button class="btn btn-danger pull-right m-2">Save</button></div> 
+                          </form>
+                        </div>
+                
+                          </div>
+                    </div>       
+    </body>
+</html>

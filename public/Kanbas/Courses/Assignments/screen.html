@@ -1,0 +1,216 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Home/index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.css"
+        rel="stylesheet"/>
+    <link rel="stylesheet" href="/Kanbas/Courses/Modules/index.css" />
+  </head>
+  <body>
+    
+    <!-- Implement links to Kanbas and Course Navigation -->
+    <div class="d-flex">
+      <div class="d-md-block">
+        <ul class="wd-kanbas-navigation">
+            <li><a href="/Kanbas/Account/Profile/screen.html">
+                <i class="fa-solid fa-circle-user" style="color: #b8b8b8;"></i>Account</a>
+            </li>
+            <li>
+             <a href="/Kanbas/Dashboard/screen.html">
+                <i class="fa fa-gauge" style="color: #ff0000;"></i>Dashboard</a>
+            </li>
+            <li  class="wd-active">
+             <a href="/Kanbas/Courses/Home/screen.html"><i class="fa fa-book" style="color: #ff0000;"></i>Courses</a>
+            </li>
+            <li>
+             <a href="#"><i class="fa fa-calendar-days" style="color: #ff0000;"></i>Calendar</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-inbox" style="color: #ff0000;"></i><br>Inbox</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa-regular fa-clock" style="color: #ff0000;"></i>History</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-display" style="color: #ff0000;"></i>Studio</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #ff0000;"></i>Commons</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa-regular fa-circle-question" style="color: #ff0000;"></i> <br>Help  </a>
+               </li>
+         </ul>
+      </div>
+
+     <div class="d-md-block">
+           <ul class="wd-navigation">
+            <li>
+              <a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+            <li>
+              <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
+            </li>
+            <li><a href="http://piazza.com">Piazza</a></li>
+            <li><a href="#">Zoom</a></li>
+            <li  class="wd-active">
+              <a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a>
+            </li>
+            <li><a href="#">Quizzes</a></li>
+            <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+            <li><a href="#">People</a></li>
+            <li>
+              <a href="/Kanbas/Courses/Settings/Course Details/screen.html">Settings</a>
+          </li>
+          </ul>
+     </div>
+
+
+
+
+
+      <div class="flex-fill">
+
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">CS5610.Spring.section</li>    
+              <li class="breadcrumb-item active" aria-current="page">Assignments</li>
+            </ol>
+        </nav>
+        <hr>
+        <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <input class="form-control" placeholder="Search for Assignment" />
+              </div>
+              <div class="col-md-9 d-flex justify-content-end">
+                <button type="button" class="btn btn-light m-1">+ Group</button>
+                <button type="button" class="btn btn-danger m-1">+ Assignment</button>
+                <button type="button" class="btn btn-light m-1">︙</button>
+              </div>
+            </div>
+          </div>
+        <hr>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+              <ul class="list-group wd-modules">
+                <li class="list-group-item">
+              <div>
+                <i class="fa fa-ellipsis-v"></i> 
+                <i class="fa-solid fa-sort-down m-2"></i>
+                <span class="fw-bold">Assignments</span> 
+                <span class="float-end">
+                    <span class="badge rounded border border-dark text-dark fw-light" style="padding: .5em .75em; font-size: 0.75em;">
+                        40% of Total
+                      </span>
+                      
+                  <i class="fa fa-plus ms-2"></i>
+                  <i class="fa fa-ellipsis-v ms-2"></i>
+                </span>
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa-regular fa-file-lines m-2" style="color: #10a87a;"></i>
+                  <a href="\Kanbas\Courses\Assignments\Edit\screen.html" style="color: inherit; text-decoration: none;">A1 SETUP</a>
+                  <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                  </span>
+                  <br>
+                  <span  style="padding: .75em 3.5em; font-size: 0.75em;">
+                    Week 0 - SETUP - Week starting on Monday Moudule  |
+                  </span>
+                </li>
+              </ul>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa-regular fa-file-lines m-2" style="color: #10a87a;"></i>
+                  <a href="\Kanbas\Courses\Assignments\Edit\screen.html" style="color: inherit; text-decoration: none;">A2 HTML</a>
+                  <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                  </span>
+                  <br>
+                  <span  style="padding: .75em 3.5em; font-size: 0.75em;">
+                    Week 0 - SETUP - Week starting on Monday Moudule  |
+                  </span>
+                </li>
+              </ul>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa-regular fa-file-lines m-2" style="color: #10a87a;"></i>
+                  <a href="\Kanbas\Courses\Assignments\Edit\screen.html" style="color: inherit; text-decoration: none;">A3 CSS</a>
+                  <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                  </span>
+                  <br>
+                  <span  style="padding: .75em 3.5em; font-size: 0.75em;">
+                    Week 0 - SETUP - Week starting on Monday Moudule  |
+                  </span>
+                </li>
+              </ul>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa-regular fa-file-lines m-2" style="color: #10a87a;"></i>
+                  <a href="\Kanbas\Courses\Assignments\Edit\screen.html" style="color: inherit; text-decoration: none;">A4 BOOKSTRAP</a>
+                  <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                  </span>
+                  <br>
+                  <span  style="padding: .75em 3.5em; font-size: 0.75em;">
+                    Week 0 - SETUP - Week starting on Monday Moudule  |
+                  </span>
+                </li>
+              </ul>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa-regular fa-file-lines m-2" style="color: #10a87a;"></i>
+                  <a href="\Kanbas\Courses\Assignments\Edit\screen.html" style="color: inherit; text-decoration: none;">A5 SETUP</a>
+                  <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                  </span>
+                  <br>
+                  <span  style="padding: .75em 3.5em; font-size: 0.75em;">
+                    Week 0 - SETUP - Week starting on Monday Moudule  |
+                  </span>
+                </li>
+              </ul>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <i class="fa fa-ellipsis-v"></i>
+                  <i class="fa-regular fa-file-lines m-2" style="color: #10a87a;"></i>
+                  <a href="\Kanbas\Courses\Assignments\Edit\screen.html" style="color: inherit; text-decoration: none;">A6 SETUP</a>
+                  <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                  </span>
+                  <br>
+                  <span  style="padding: .75em 3.5em; font-size: 0.75em;">
+                    Week 0 - SETUP - Week starting on Monday Moudule  |
+                  </span>
+                </li>
+              </ul>
+            </li>
+          </ul></div></div>
+      </div>
+</div>
+
+
+      
+    </div>
+  </body>
+</html>

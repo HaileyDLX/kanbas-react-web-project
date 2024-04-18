@@ -1,0 +1,86 @@
+.wd-modules,
+.wd-modules * {
+  border-radius: 0%;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.wd-modules {
+  margin: 5px;
+}
+
+.wd-modules > li {
+  background-color: lightgray;
+  border: 1px solid gray !important;
+  border-left: none !important;
+}
+
+.wd-modules > li > div {
+  padding: 6px;
+  border-left: 1px solid gray !important;
+}
+
+.wd-modules > li > ul > li {
+  padding: 5px;
+  border-top: 1px solid gray !important;
+  border-left: 2px solid green;
+}
+
+.wd-modules > li {
+  margin-bottom: 20px;
+}
+
+
+
+.right-sidebar {
+  width: 250px; /* Adjust width as needed */
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #f8f9fa; /* Adjust the color as needed */
+  overflow-y: auto;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc; /* Adjust color as needed */
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.to-do-list h5 {
+  padding: 10px;
+  margin: 0;
+}
+
+.to-do-item {
+  display: flex;
+  align-items: center;
+  /*padding: 10px;*/
+  /*border-bottom: 1px solid #ccc; !* Adjust color as needed *!*/
+}
+
+.btn-custom {
+  width: 230px;
+  text-align: left;
+}
+
+.icon-button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-indent: -9999px;
+}

@@ -1,0 +1,31 @@
+[ { "_id": "RS101", "name": "Rocket Propulsion", "number": "RS4550", "startDate": "2023-01-10",
+  "endDate": "2023-05-15", "image": "reactjs.png"  },
+  { "_id": "RS102", "name": "Aerodynamics", "number": "RS4560", "startDate": "2023-01-10",
+    "endDate": "2023-05-15", "image": "reactjs.png"  },
+  { "_id": "RS103", "name": "Spacecraft Design", "number": "RS4570", "startDate": "2023-01-10",
+    "endDate": "2023-05-15", "image": "reactjs.png"  },
+  {
+    "_id": "KS105",
+    "name": "Spacecraft Designer",
+    "number": "RS4590",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "image": "starship.jpg"
+  },
+  {
+    "_id": "AI204",
+    "name": "Artificial Intelligence Fundamentals",
+    "number": "AI5500",
+    "startDate": "2023-02-05",
+    "endDate": "2023-06-20",
+    "image": "reactjs.png"
+  },
+  {
+    "_id": "WD305",
+    "name": "Web Development with React",
+    "number": "WD6780",
+    "startDate": "2023-03-01",
+    "endDate": "2023-07-15",
+    "image": "reactjs.png"
+  }
+]

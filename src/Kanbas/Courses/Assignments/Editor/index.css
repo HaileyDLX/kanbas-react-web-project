@@ -1,0 +1,16 @@
+
+.fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 1.1em; /* Adjust the font size as needed */
+}
+
+.legend {
+    font-size: 1em; /* Adjust the font size as needed */
+}
