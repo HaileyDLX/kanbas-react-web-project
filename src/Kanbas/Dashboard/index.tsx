@@ -80,7 +80,7 @@ function Dashboard( { courses, course, setCourse, addNewCourse,
                                      style={{height: 150}}/>
                                 <div className="card-body">
                                     <Link className="card-title"
-                                          to={`/Kanbas/Courses/${course.id}/Home`}
+                                          to={`/Kanbas/Courses/${course._id}/Home`}
                                           style={{
                                               textDecoration: "none",
                                               color: "navy",

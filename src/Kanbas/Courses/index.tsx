@@ -12,6 +12,7 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import Quizzes from "./quizzes";
+import QuizDetails from "./quizzes/Details";
 const API_BASE = process.env.REACT_APP_API_BASE;
 function Courses() {
     const {cid} =useParams();
@@ -61,7 +62,7 @@ function Courses() {
                         <Route path="Piazza" element={<h1>Piazza</h1>}/>
                         <Route path="Assignments" element={<Assignments/>}/>
                         <Route path="Quizzes" element={<Quizzes/>}/>
-
+                        <Route path="Quizzes/details/:quizId" element={<QuizDetails/>}/>
                         <Route path="Assignments/:assignmentId" element={<AssignmentEditor/>}/>
 
                         <Route path="Grades" element={<Grades/>}/>
