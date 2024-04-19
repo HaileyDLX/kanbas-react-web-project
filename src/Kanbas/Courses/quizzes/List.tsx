@@ -171,7 +171,10 @@ function QuizList() {
                                         {/* Conditionally rendered dropdown menu */}
                                         {menuVisible[quiz._id] && (
                                             <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu">
-                                                <button onClick={() => handleUpdateQuiz(quiz._id)}>Edit</button><br />
+                                                <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}>
+                                                <button >Edit</button><br />
+                                                </Link>
+                                               
                                                 <button onClick={() => handleDeleteQuiz(quiz._id)}>Delete</button>< br />
                                                 <button onClick={() => toggleIcon(quiz._id)} className="btn">
                                                     {publish[quiz._id] ? 'Unpublish' : 'Publish'}
