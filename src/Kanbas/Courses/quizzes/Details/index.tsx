@@ -48,24 +48,120 @@ function QuizDetails() {
     }, []);
 
     return (
-        <div>
-            <h1>Quiz Details</h1>
-            <p>Title: {quiz.title}</p>
-            <p>Quiz Type: {quiz.quizType}</p>
-            <p>Points: {quiz.points}</p>
-            <p>Assignment Group: {quiz.assignmentGroup}</p>
-            <p>Shuffle Answers: {quiz.shuffleAnswers ? "Yes" : "No"}</p>
-            <p>Time Limit: {quiz.timeLimit} Minutes</p>
-            <p>Multiple Attempts: {quiz.multipleAttempts ? "Yes" : "No"}</p>
-            <p>Show Correct Answers: {quiz.showCorrectAnswers ? "Yes" : "No"}</p>
-            <p>Access Code: {quiz.accessCode || "Blank"}</p>
-            <p>One Question at a Time: {quiz.oneQuestionAtATime ? "Yes" : "No"}</p>
-            <p>Webcam Required: {quiz.webcamRequired ? "Yes" : "No"}</p>
-            <p>Lock Questions After Answering: {quiz.lockQuestionsAfterAnswering ? "Yes" : "No"}</p>
-            <p>Due Date: {quiz.dueDate}</p>
-            <p>Available Date: {quiz.availableDate}</p>
-            <p>Until Date: {quiz.untilDate}</p>
+        <div style={{fontFamily: "'Arial', sans-serif", lineHeight: 1.6}}>
+            <h1>{quiz.title}</h1>
+            <br/>
+            <table>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Quiz Type</th>
+                    <td>{quiz.quizType}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Points</th>
+                    <td>{quiz.points}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Assignment Group</th>
+                    <td>{quiz.assignmentGroup}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Shuffle Answers</th>
+                    <td>{quiz.shuffleAnswers ? "Yes" : "No"}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Time Limit</th>
+                    <td>{quiz.timeLimit} Minutes</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Multiple Attempts</th>
+                    <td>{quiz.multipleAttempts ? "Yes" : "No"}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Show Correct Answers</th>
+                    <td>{quiz.showCorrectAnswers ? "Yes" : "No"}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Access Code</th>
+                    <td>{quiz.accessCode}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>One Question at a Time</th>
+                    <td>{quiz.oneQuestionAtATime ? "Yes" : "No"}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Webcam Required</th>
+                    <td>{quiz.webcamRequired ? "Yes" : "No"}</td>
+                </tr>
+                <tr>
+                    <th style={{textAlign : 'right', paddingRight :'15px'}}>Lock Questions After Answering</th>
+                    <td>{quiz.lockQuestionsAfterAnswering ? "Yes" : "No"}</td>
+                </tr>
+            </table>
+            <br/>
+            <table style={{
+                width: '100%',
+                borderCollapse: 'collapse',
+                fontFamily: 'Arial, sans-serif',
+                lineHeight: 1.6,
+                marginBottom: '20px'
+            }}>
+                <thead>
+                <tr>
+                    <th style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>Due
+                    </th>
+                    <th style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>For
+                    </th>
+                    <th style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>Available from
+                    </th>
+                    <th style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>Until
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>{quiz.dueDate}</td>
+                    <td style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>Everyone
+                    </td>
+                    <td style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>{quiz.availableDate}</td>
+                    <td style={{
+                        padding: '8px',
+                        textAlign: 'left',
+                        borderBottom: '1px solid #ddd'
+                    }}>{quiz.untilDate}</td>
+                </tr>
+                </tbody>
+            </table>
+
         </div>
+
     );
 }
 
