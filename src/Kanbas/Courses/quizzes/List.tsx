@@ -10,7 +10,7 @@ import {
 } from "./reducer";
 import { KanbasState } from "../../store";
 import * as client from "./client";
-import { FaCheckCircle, FaEllipsisV, FaFileAlt, FaPlusCircle, FaEyeSlash } from "react-icons/fa";
+import { FaCheckCircle, FaEllipsisV, FaFileAlt, FaRocket, FaEyeSlash } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 
 
@@ -109,11 +109,10 @@ function QuizList() {
             {<div className="container mt-3">
                 <div className="row">
                     <div className="col-md-3">
-                        <input className="form-control" placeholder="Search for Assignment" />
+                        <input className="form-control" placeholder="Search for Quiz" />
                     </div>
                     <div className="col-md-9 d-flex justify-content-end">
-                        <button type="button" className="btn btn-light m-1">+ Group</button>
-                        <Link to={`/Kanbas/Courses/${cid}/quizzes/new`}
+                        <Link to={`/Kanbas/Courses/${cid}/quizzes/details/new`}
                             className="btn btn-danger float-end mb-2">
                             +quiz
                         </Link>
@@ -123,34 +122,28 @@ function QuizList() {
                 </div>
             </div>}
             <hr />
+
             <ul className="list-group wd-modules">
                 <li className="list-group-item">
                     <div>
-
-                        <FaEllipsisV className="me-2" /> <IoIosArrowDown />ASSIGNMENTS
-                        <span className="float-end">
-
-                            <FaCheckCircle className="text-success" />
-                            <FaPlusCircle className="ms-2" /><FaEllipsisV className="ms-2" />
-                        </span>
-
-                        <span
-                            className=" float-end badge rounded border border-dark text-dark fw-light"
-                            style={{ padding: '.5em .75em', fontSize: '0.75em' }}>
-                            40% of Total
-                        </span>
+                         <IoIosArrowDown />Assignment Quizzes
                     </div>
-                    <ul className="list-group">
+
+
+                        {quizList.filter((quiz) => quiz.course === cid).length === 0 && (
+                            <p style={{color: 'red'}}>You can add quiz by +quiz button</p>
+                        )}
+                        <ul className="list-group">
                         {quizList
                             .filter((quiz) => quiz.course === cid)
                             .map((quiz, index) => (
                                 <li className="list-group-item d-flex align-items-center justify-content-between">
                                     <div>
-                                        <FaEllipsisV className="me-2" />
-                                        <FaFileAlt style={{ color: '#658f6d' }} />
-                                        <Link to={`/Kanbas/Courses/${cid}/quizzes/details/${quiz._id}`}>
+                                        <FaRocket className="m-1" style={{ color: '#658f6d' }} />
+                                        <Link to={`/Kanbas/Courses/${cid}/quizzes/details/${quiz._id}`} className="bold-link" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>
                                             {quiz.title}
                                         </Link>
+
                                         <div style={{ marginTop: '0.5rem', marginBottom: '0.25rem' }}>
                                             <small className="text-muted">
                                                 {getAvailabilityText(quiz.availableDate,quiz.untilDate)} | Due {quiz.dueDate} | {quiz.points}pts | Total questions
@@ -170,10 +163,10 @@ function QuizList() {
 
                                         {/* Conditionally rendered dropdown menu */}
                                         {menuVisible[quiz._id] && (
-                                            <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu">
-                                                <button onClick={() => handleUpdateQuiz(quiz._id)}>Edit</button><br />
-                                                <button onClick={() => handleDeleteQuiz(quiz._id)}>Delete</button>< br />
-                                                <button onClick={() => toggleIcon(quiz._id)} className="btn">
+                                            <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu" style={{ display: 'flex' }}>
+                                                <button onClick={() => handleUpdateQuiz(quiz._id)} style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Edit</button><br />
+                                                <button onClick={() => handleDeleteQuiz(quiz._id)} style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Delete</button>< br />
+                                                <button onClick={() => toggleIcon(quiz._id)} className="btn" style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>
                                                     {publish[quiz._id] ? 'Unpublish' : 'Publish'}
                                                 </button>
 
@@ -183,6 +176,8 @@ function QuizList() {
                                 </li>
                             ))}
                     </ul>
+
+
 
                 </li>
             </ul>
