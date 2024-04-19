@@ -165,7 +165,7 @@ function QuizList() {
                                         {menuVisible[quiz._id] && (
                                             <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu" style={{ display: 'flex' }}>
                                                <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}>
-                                                <button >Edit</button><br />
+                                                <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Edit</button><br />
                                                 </Link>
                                                 <button onClick={() => handleDeleteQuiz(quiz._id)} style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Delete</button>< br />
                                                 <button onClick={() => toggleIcon(quiz._id)} className="btn" style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>
