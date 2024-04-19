@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef  } from "react";
 import {Link, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,8 +10,9 @@ import {
 } from "./reducer";
 import { KanbasState } from "../../store";
 import * as client from "./client";
-import {FaCheckCircle, FaEllipsisV, FaFileAlt, FaPlusCircle} from "react-icons/fa";
+import {FaCheckCircle, FaEllipsisV, FaFileAlt, FaPlusCircle,FaEyeSlash} from "react-icons/fa";
 import {IoIosArrowDown} from "react-icons/io";
+
 
 function QuizList() {
     const { cid } = useParams();
@@ -27,7 +28,7 @@ function QuizList() {
             dispatch(deleteQuiz(quizId));
         });
     };
-    const handleUpdateQuiz = async () => {
+    const handleUpdateQuiz = async (quizId: string) => {
         const status = await client.updateQuiz(quiz);
         dispatch(updateQuiz(quiz));
         window.location.reload();
@@ -43,8 +44,62 @@ function QuizList() {
             dispatch(addQuiz(quiz));
         });
     };
+    const getAvailabilityText = (availableDate:any) => {
+        const currentDate = new Date();
+        const availableDateObject = new Date(availableDate);
+        if (currentDate > availableDateObject) {
+          return 'Closed';
+        } else {
+          return `Not available until ${availableDate}`;
+        }
+      };
+      type PublishState = {
+        [key: string]: boolean;
+    };
+    
+    const [publish, setPublish] = useState<PublishState>({});
+      const toggleIcon = (quizId:any) => {
+        setPublish(prePublish => ({
+            ...prePublish,
+            [quizId]: !prePublish[quizId]
+        }));
+    };
 
+    type MenuVisibleState = {
+        [key: string]: boolean;
+      };
+      type MenuRefs = {
+        [key: string]: HTMLDivElement | null;
+      };
+      const [menuVisible, setMenuVisible] = useState<MenuVisibleState>({});
 
+      const menuRefs = useRef<MenuRefs>({});
+
+    // 显示或隐藏菜单的函数
+    const toggleMenu = (quizId:any) => {
+        setMenuVisible((prev) => ({ ...prev, [quizId]: !prev[quizId] }));
+    };
+
+    // 处理菜单外部点击
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            Object.keys(menuRefs.current).forEach((key) => {
+                // Check that the ref object is not null before calling 'contains'
+                if (menuRefs.current[key] && !menuRefs.current[key]!.contains(event.target as Node)) {
+                    setMenuVisible((prev) => ({ ...prev, [key]: false }));
+                }
+            });
+        }
+    
+        // Attach the event listener
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        // Clean up the event listener
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+    
     return (
         <>
             {<div className="container mt-3">
@@ -82,26 +137,46 @@ function QuizList() {
 </span>
                     </div>
                     <ul className="list-group">
-                        {quizList
-                            .filter((quiz) => quiz.course === cid)
-                            .map((quiz, index) => (
-                            <li className="list-group-item">
+  {quizList
+    .filter((quiz) => quiz.course === cid)
+    .map((quiz, index) => (
+      <li className="list-group-item d-flex align-items-center justify-content-between">
+        <div>
+          <FaEllipsisV className="me-2"/>
+          <FaFileAlt style={{color: '#658f6d'}}/>
+          <Link to={`/Kanbas/Courses/${cid}/quizzes/${quiz._id}`}>
+            {quiz.title}
+          </Link>
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.25rem' }}>
+          <small className="text-muted">
+              {getAvailabilityText(quiz.availableDate)} | Due {quiz.dueDate} | {quiz.points}pts | Total questions
+            </small>
+          </div>
+        </div>
+        
 
+        {/* Dropdown toggle button */}
+        <div>
+        {publish[quiz._id] ? <FaCheckCircle className="text-success"/> : <FaEyeSlash className="text-success"/>}
 
-                                <FaEllipsisV className="me-2"/><FaFileAlt
-                                style={{color: '#658f6d'}}/>
-                                <Link
-                                    to={`/Kanbas/Courses/${cid}/quizzes/${quiz._id}`}>{quiz.title}</Link>
-                                <button className="btn btn-danger m-1 float-end"
-                                        onClick={() => handleDeleteQuiz(quiz._id)}>
-                                    Delete
-                                </button>
-                                <span className="float-end">
-                  <FaCheckCircle className="text-success"/><FaEllipsisV className="ms-2"/></span>
-                                <br/>
+                            <button className="btn" onClick={() => toggleMenu(quiz._id)}>
+                                <FaEllipsisV className="ms-2"/>
+                            </button>
 
-                            </li>))}
-                    </ul>
+                            {/* Conditionally rendered dropdown menu */}
+                            {menuVisible[quiz._id] && (
+                                <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu">
+                                    <button onClick={() => handleUpdateQuiz(quiz._id)}>Edit</button><br />
+                                    <button onClick={() => handleDeleteQuiz(quiz._id)}>Delete</button>< br />
+                                    <button onClick={() => toggleIcon(quiz._id)}>Publish</button>< br />
+                                   
+                                </div>
+                            )}
+        </div>
+      </li>
+  ))}
+</ul>
+
                 </li>
             </ul>
         </>
