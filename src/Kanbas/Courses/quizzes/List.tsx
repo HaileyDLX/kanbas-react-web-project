@@ -10,7 +10,7 @@ import {
 } from "./reducer";
 import { KanbasState } from "../../store";
 import * as client from "./client";
-import { FaCheckCircle, FaEllipsisV, FaFileAlt, FaRocket, FaEyeSlash } from "react-icons/fa";
+import { FaCheckCircle, FaEllipsisV,  FaRocket, FaEyeSlash } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 
 
@@ -28,11 +28,16 @@ function QuizList() {
             dispatch(deleteQuiz(quizId));
         });
     };
-    const handleUpdateQuiz = async (quizId: string) => {
-        const status = await client.updateQuiz(quiz);
-        dispatch(updateQuiz(quiz));
-        window.location.reload();
+    const handleUpdateQuiz = async (quiz:any) => {
+        try {
+            // 先发送更新请求到后端
+            const status = await client.updateQuiz(quiz);
+                dispatch(updateQuiz(quiz));
+        } catch (error) {
+            console.error('Failed to update quiz:', error);
+        }
     };
+    
 
     const quizList = useSelector((state: KanbasState) =>
         state.quizzesReducer.quizzes);
@@ -48,26 +53,21 @@ function QuizList() {
         const currentDate = new Date();
         const availableDateObject = new Date(availableDate);
         const untilDateObject = new Date(untilDate);
-      
+
         if (currentDate > untilDateObject) {
-          return 'Closed';
+            return 'Closed';
         } else if (currentDate >= availableDateObject && currentDate <= untilDateObject) {
-          return 'Available';
+            return 'Available';
         } else {
-          return `Not available until ${availableDate}`;
+            return `Not available until ${availableDate}`;
         }
-      };
+    };
     type PublishState = {
         [key: string]: boolean;
     };
 
     const [publish, setPublish] = useState<PublishState>({});
-    const toggleIcon = (quizId: any) => {
-        setPublish(prePublish => ({
-            ...prePublish,
-            [quizId]: !prePublish[quizId]
-        }));
-    };
+    
 
     type MenuVisibleState = {
         [key: string]: boolean;
@@ -86,6 +86,7 @@ function QuizList() {
 
     // 处理菜单外部点击
     useEffect(() => {
+
         function handleClickOutside(event: MouseEvent) {
             Object.keys(menuRefs.current).forEach((key) => {
                 // Check that the ref object is not null before calling 'contains'
@@ -103,7 +104,41 @@ function QuizList() {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-
+    const [publishStates, setPublishStates] = useState<PublishState>({});
+    useEffect(() => {
+        // 获取课程的测验列表并设置发布状态
+        client.findQuizzesForCourse(cid)
+            .then((quizzes) => {
+                // 更新Redux中的测验列表
+                dispatch(setQuizzes(quizzes));
+                // 初始化publish状态
+                setPublishStates(quizzes.reduce((acc: any, quiz: any) => ({
+                    ...acc,
+                    [quiz._id]: quiz.published,
+                }), {}));
+            });
+        // 只有cid和dispatch变化时才会重新运行此effect
+    }, [cid, dispatch]);
+    const handleTogglePublish = async (quiz:any) => {
+        const newPublishedState = !publishStates[quiz._id];
+        try {
+            const updatedQuiz = { ...quiz, published: newPublishedState };
+            const success = await handleUpdateQuiz(updatedQuiz);
+            console.log('API Update Status:', success);
+           
+               
+                setPublishStates(prev => {
+                    const newState = { ...prev, [quiz._id]: newPublishedState };
+                    console.log('Updated state:', newState);
+                    return newState;
+                });
+                dispatch(updateQuiz(updatedQuiz));
+           
+        } catch (error) {
+            console.error('Failed to update quiz published state:', error);
+        }
+    };
+    
     return (
         <>
             {<div className="container mt-3">
@@ -113,35 +148,27 @@ function QuizList() {
                     </div>
                     <div className="col-md-9 d-flex justify-content-end">
                         <Link to={`/Kanbas/Courses/${cid}/quizzes/details/new`}
-                              className="btn btn-danger float-end mb-2">
+                            className="btn btn-danger float-end mb-2">
                             +quiz
                         </Link>
                         <button type="button" className="btn btn-light m-1">︙</button>
 
-                        {/*<button*/}
-                        {/*    className="btn btn-primary"*/}
-                        {/*    type="button"*/}
-                        {/*    onClick={handleAddQuiz}*/}
-                        {/*>*/}
-                        {/*    Add*/}
-                        {/*</button>*/}
-
                     </div>
                 </div>
             </div>}
-            <hr/>
+            <hr />
 
             <ul className="list-group wd-modules">
                 <li className="list-group-item">
                     <div>
-                        <IoIosArrowDown/>Assignment Quizzes
+                        <IoIosArrowDown />Assignment Quizzes
                     </div>
 
 
-                        {quizList.filter((quiz) => quiz.course === cid).length === 0 && (
-                            <p style={{color: 'red'}}>You can add quiz by +quiz button</p>
-                        )}
-                        <ul className="list-group">
+                    {quizList.filter((quiz) => quiz.course === cid).length === 0 && (
+                        <p style={{ color: 'red' }}>You can add quiz by +quiz button</p>
+                    )}
+                    <ul className="list-group">
                         {quizList
                             .filter((quiz) => quiz.course === cid)
                             .map((quiz, index) => (
@@ -154,8 +181,8 @@ function QuizList() {
 
                                         <div style={{ marginTop: '0.5rem', marginBottom: '0.25rem' }}>
                                             <small className="text-muted">
-                                                {getAvailabilityText(quiz.availableDate,quiz.untilDate)} | Due {quiz.dueDate} | {quiz.points}pts | Total questions
-                                                {console.log(quiz.dueDate)}
+                                                {getAvailabilityText(quiz.availableDate, quiz.untilDate)} | Due {quiz.dueDate} | {quiz.points}pts | Total questions
+                                                
                                             </small>
                                         </div>
                                     </div>
@@ -163,7 +190,8 @@ function QuizList() {
 
                                     {/* Dropdown toggle button */}
                                     <div>
-                                        {publish[quiz._id] ? <FaCheckCircle className="text-success" /> : <FaEyeSlash className="text-success" />}
+                                    {publishStates[quiz._id] ? <FaCheckCircle className="text-success" /> : <FaEyeSlash className="text-success" />}
+
 
                                         <button className="btn" onClick={() => toggleMenu(quiz._id)}>
                                             <FaEllipsisV className="ms-2" />
@@ -172,25 +200,15 @@ function QuizList() {
                                         {/* Conditionally rendered dropdown menu */}
                                         {menuVisible[quiz._id] && (
                                             <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu" style={{ display: 'flex' }}>
-                                                <Link
-                                                    to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}
-                                                    className="bold-link"
-                                                    style={{
-                                                        textDecoration: 'none',
-                                                        color: 'black',
-                                                        backgroundColor: 'white',
-                                                        border: '1px solid black',
-                                                        borderRadius: '5px',
-                                                        marginRight: '5px'
-                                                    }}
-                                                >
-                                                    Edit
-                                                </Link><br />
+                                                <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}>
+                                                    <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Edit</button><br />
+                                                </Link>
                                                 <button onClick={() => handleDeleteQuiz(quiz._id)} style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Delete</button>< br />
-                                                <button onClick={() => toggleIcon(quiz._id)} className="btn" style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>
-                                                    {publish[quiz._id] ? 'Unpublish' : 'Publish'}
+                                                <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }} onClick={() => handleTogglePublish(quiz)}>
+                                                    {publishStates[quiz._id] ? ' Unpublish' : ' Publish'}
+                                                    
                                                 </button>
-
+                                                
                                             </div>
                                         )}
                                     </div>
