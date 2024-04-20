@@ -113,20 +113,28 @@ function QuizList() {
                     </div>
                     <div className="col-md-9 d-flex justify-content-end">
                         <Link to={`/Kanbas/Courses/${cid}/quizzes/details/new`}
-                            className="btn btn-danger float-end mb-2">
+                              className="btn btn-danger float-end mb-2">
                             +quiz
                         </Link>
                         <button type="button" className="btn btn-light m-1">︙</button>
 
+                        {/*<button*/}
+                        {/*    className="btn btn-primary"*/}
+                        {/*    type="button"*/}
+                        {/*    onClick={handleAddQuiz}*/}
+                        {/*>*/}
+                        {/*    Add*/}
+                        {/*</button>*/}
+
                     </div>
                 </div>
             </div>}
-            <hr />
+            <hr/>
 
             <ul className="list-group wd-modules">
                 <li className="list-group-item">
                     <div>
-                         <IoIosArrowDown />Assignment Quizzes
+                        <IoIosArrowDown/>Assignment Quizzes
                     </div>
 
 
@@ -164,7 +172,20 @@ function QuizList() {
                                         {/* Conditionally rendered dropdown menu */}
                                         {menuVisible[quiz._id] && (
                                             <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu" style={{ display: 'flex' }}>
-                                                <button onClick={() => handleUpdateQuiz(quiz._id)} style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Edit</button><br />
+                                                <Link
+                                                    to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}
+                                                    className="bold-link"
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'black',
+                                                        backgroundColor: 'white',
+                                                        border: '1px solid black',
+                                                        borderRadius: '5px',
+                                                        marginRight: '5px'
+                                                    }}
+                                                >
+                                                    Edit
+                                                </Link><br />
                                                 <button onClick={() => handleDeleteQuiz(quiz._id)} style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Delete</button>< br />
                                                 <button onClick={() => toggleIcon(quiz._id)} className="btn" style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>
                                                     {publish[quiz._id] ? 'Unpublish' : 'Publish'}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { FaEllipsisV, } from "react-icons/fa";
-//import { assignments } from "../../../Database";
 import { addAssignment, updateAssignment, deleteAssignment, setAssignment } from "../reducer";
 import { KanbasState } from "../../../store";
 import * as client from "../client";
