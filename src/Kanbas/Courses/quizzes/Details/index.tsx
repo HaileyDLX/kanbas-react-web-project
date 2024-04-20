@@ -2,19 +2,26 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as client from "../client";
-import { setQuiz } from "../reducer";
-import { KanbasState } from "../../../store";
-import { FaEllipsisV, } from "react-icons/fa";
 
+import { KanbasState } from "../../../store";
+import { FaEllipsisV, FaEyeSlash} from "react-icons/fa";
+import {
+    addQuiz,
+    deleteQuiz,
+    updateQuiz,
+    setQuiz,
+    setQuizzes,
+} from "../reducer";
 
 function QuizDetails() {
-    const { quizId } = useParams();
+    const { cid,quizId} = useParams();
     console.log("quizId", quizId);
-    const [quiz, setQuiz] = useState({ title: "", quizType: "", points: 0, assignmentGroup: "", shuffleAnswers: false, timeLimit: 0, multipleAttempts: false, showCorrectAnswers: false, accessCode: "", oneQuestionAtATime: false, webcamRequired: false, lockQuestionsAfterAnswering: false, dueDate: "", availableDate: "", untilDate: "" });
+    const [quiz, setQuiz] = useState({ _id:"",title: "", quizType: "", points: 0, assignmentGroup: "", shuffleAnswers: false, timeLimit: 0, multipleAttempts: false, showCorrectAnswers: false, accessCode: "", oneQuestionAtATime: false, webcamRequired: false, lockQuestionsAfterAnswering: false, dueDate: "", availableDate: "", untilDate: "",published:false });
     const navigate = useNavigate();const fetchQuiz = async () => {
         try {
             if (quizId === "new") {
                 setQuiz({
+                    _id:"",
                     title: "New Quiz",
                     quizType: "Graded Quiz",
                     points: 0,
@@ -29,7 +36,8 @@ function QuizDetails() {
                     lockQuestionsAfterAnswering: false,
                     dueDate: "",
                     availableDate: "",
-                    untilDate: ""
+                    untilDate: "",
+                    published: false 
                 });
             } else {
                 const account = await client.getQuizById(quizId);
@@ -48,14 +56,29 @@ function QuizDetails() {
     useEffect(() => {
         fetchQuiz();
     }, []);
-
+    const togglePublishStatus = async () => {
+        const updatedStatus = !quiz.published;
+        try {
+            const updatedQuiz = { ...quiz, published: updatedStatus };
+            await client.updateQuiz(updatedQuiz); // 假设这个函数处理 API 请求
+            setQuiz(updatedQuiz); // 更新前端状态
+        } catch (error) {
+            console.error('Failed to update publish status:', error);
+        }
+    };
+    
     return (
         <div>
             <div className="d-flex justify-content-end">
-                <button className="me-2">Published</button>
-                <button className="me-2">Previewed</button>
-                <button className="me-2">Edit</button>
-                <button><FaEllipsisV/></button>
+            <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }} className="me-2" onClick={togglePublishStatus}>
+    {quiz.published ? <><FaEyeSlash /> Unpublish</> : "Publish"}
+</button>
+
+                <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }} className="me-2">Previewed</button>
+                <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}>
+                                                    <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Edit</button><br />
+                                                </Link>
+                <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}><FaEllipsisV/></button>
 
             </div>
             <hr/>

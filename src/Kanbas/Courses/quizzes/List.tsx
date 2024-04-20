@@ -10,7 +10,7 @@ import {
 } from "./reducer";
 import { KanbasState } from "../../store";
 import * as client from "./client";
-import { FaCheckCircle, FaEllipsisV, FaFileAlt, FaRocket, FaEyeSlash } from "react-icons/fa";
+import { FaCheckCircle, FaEllipsisV,  FaRocket, FaEyeSlash } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 
 
