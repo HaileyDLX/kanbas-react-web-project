@@ -21,17 +21,17 @@ function QuizDetails() {
         try {
             if (quizId === "new") {
                 setQuiz({
-                    _id:"",
+                    _id:"new",
                     title: "New Quiz",
                     quizType: "Graded Quiz",
                     points: 0,
-                    assignmentGroup: "",
-                    shuffleAnswers: false,
+                    assignmentGroup: "Quizzes",
+                    shuffleAnswers: true,
                     timeLimit: 20,
                     multipleAttempts: false,
                     showCorrectAnswers: false,
                     accessCode: "",
-                    oneQuestionAtATime: false,
+                    oneQuestionAtATime: true,
                     webcamRequired: false,
                     lockQuestionsAfterAnswering: false,
                     dueDate: "",
@@ -66,7 +66,34 @@ function QuizDetails() {
             console.error('Failed to update publish status:', error);
         }
     };
-    
+
+    function formatDate(isoString: string): string {
+        const date = new Date(isoString);
+
+        // Extract date components directly as numbers
+        let month = date.getUTCMonth() + 1; // getUTCMonth returns 0-11
+        let day = date.getUTCDate();
+        const year = date.getUTCFullYear();
+        let hours = date.getUTCHours();
+        const minutes = date.getUTCMinutes();
+
+        // Determine AM or PM and convert hours to 12-hour format
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours === 0 ? 12 : hours; // Adjust 0 to 12 for 12 AM
+
+        // Format month, day, hours, and minutes to ensure two digits
+        const monthFormatted = month < 10 ? '0' + month : month.toString();
+        const dayFormatted = day < 10 ? '0' + day : day.toString();
+        const hoursFormatted = hours < 10 ? '0' + hours : hours.toString();
+        const minutesFormatted = minutes < 10 ? '0' + minutes : minutes.toString();
+
+        return `${year}-${monthFormatted}-${dayFormatted} ${hoursFormatted}:${minutesFormatted} ${ampm}`;
+    }
+
+
+
+
     return (
         <div>
             <div className="d-flex justify-content-end">
@@ -180,7 +207,7 @@ function QuizDetails() {
                             padding: '8px',
                             textAlign: 'left',
                             borderBottom: '1px solid #ddd'
-                        }}>{quiz.dueDate}</td>
+                        }}>{formatDate(quiz.dueDate)}</td>
                         <td style={{
                             padding: '8px',
                             textAlign: 'left',
@@ -191,12 +218,12 @@ function QuizDetails() {
                             padding: '8px',
                             textAlign: 'left',
                             borderBottom: '1px solid #ddd'
-                        }}>{quiz.availableDate}</td>
+                        }}>{formatDate(quiz.availableDate)}</td>
                         <td style={{
                             padding: '8px',
                             textAlign: 'left',
                             borderBottom: '1px solid #ddd'
-                        }}>{quiz.untilDate}</td>
+                        }}>{formatDate(quiz.untilDate)}</td>
                     </tr>
                     </tbody>
                 </table>
