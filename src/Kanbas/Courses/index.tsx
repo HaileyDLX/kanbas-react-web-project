@@ -14,6 +14,7 @@ import Grades from "./Grades";
 import Quizzes from "./quizzes";
 import QuizDetails from "./quizzes/Details";
 import QuizEditor from "./quizzes/Editor";
+import QuestionEditor from "./quizzes/Editor/QuestionEditor";
 const API_BASE = process.env.REACT_APP_API_BASE;
 function Courses() {
     const {cid} =useParams();
@@ -65,6 +66,8 @@ function Courses() {
                         <Route path="Quizzes" element={<Quizzes/>}/>
                         <Route path="Quizzes/details/:quizId" element={<QuizDetails/>}/>
                         <Route path="Quizzes/editor/:quizId" element = {<QuizEditor/>}/>
+                        <Route path="Question/editor/:questionId" element={<QuestionEditor/>}/>
+
                         <Route path="Assignments/:assignmentId" element={<AssignmentEditor/>}/>
                         <Route path="Grades" element={<Grades/>}/>
 

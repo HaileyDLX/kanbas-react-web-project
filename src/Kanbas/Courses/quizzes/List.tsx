@@ -1,11 +1,10 @@
+
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    addQuiz,
     deleteQuiz,
     updateQuiz,
-    setQuiz,
     setQuizzes,
 } from "./reducer";
 import { KanbasState } from "../../store";
@@ -16,6 +15,7 @@ import { IoIosArrowDown } from "react-icons/io";
 
 function QuizList() {
     const { cid } = useParams();
+
     useEffect(() => {
         client.findQuizzesForCourse(cid)
             .then((quizzes) =>
@@ -27,11 +27,10 @@ function QuizList() {
         client.deleteQuiz(quizId).then((status: any) => {
             dispatch(deleteQuiz(quizId));
         });
+       window.location.reload();
     };
     const handleUpdateQuiz = async (quiz:any) => {
         try {
-            // 先发送更新请求到后端
-            const status = await client.updateQuiz(quiz);
                 dispatch(updateQuiz(quiz));
         } catch (error) {
             console.error('Failed to update quiz:', error);
@@ -41,14 +40,9 @@ function QuizList() {
 
     const quizList = useSelector((state: KanbasState) =>
         state.quizzesReducer.quizzes);
-    const quiz = useSelector((state: KanbasState) =>
-        state.quizzesReducer.quiz);
+
     const dispatch = useDispatch();
-    const handleAddQuiz = () => {
-        client.createQuiz(cid, quiz).then((quiz) => {
-            dispatch(addQuiz(quiz));
-        });
-    };
+
     const getAvailabilityText = (availableDate: any, untilDate: any) => {
         const currentDate = new Date();
         const availableDateObject = new Date(availableDate);
@@ -59,7 +53,7 @@ function QuizList() {
         } else if (currentDate >= availableDateObject && currentDate <= untilDateObject) {
             return 'Available';
         } else {
-            return `Not available until ${availableDate}`;
+            return `Not available until ${formatDate(availableDate)}`;
         }
     };
     type PublishState = {
@@ -138,7 +132,31 @@ function QuizList() {
             console.error('Failed to update quiz published state:', error);
         }
     };
-    
+    function formatDate(isoString: string): string {
+        const date = new Date(isoString);
+
+        // Extract date components directly as numbers
+        let month = date.getUTCMonth() + 1; // getUTCMonth returns 0-11
+        let day = date.getUTCDate();
+        const year = date.getUTCFullYear();
+        let hours = date.getUTCHours();
+        const minutes = date.getUTCMinutes();
+
+        // Determine AM or PM and convert hours to 12-hour format
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours === 0 ? 12 : hours; // Adjust 0 to 12 for 12 AM
+
+        // Format month, day, hours, and minutes to ensure two digits
+        const monthFormatted = month < 10 ? '0' + month : month.toString();
+        const dayFormatted = day < 10 ? '0' + day : day.toString();
+        const hoursFormatted = hours < 10 ? '0' + hours : hours.toString();
+        const minutesFormatted = minutes < 10 ? '0' + minutes : minutes.toString();
+
+        return `${year}-${monthFormatted}-${dayFormatted} ${hoursFormatted}:${minutesFormatted} ${ampm}`;
+    }
+
+
     return (
         <>
             {<div className="container mt-3">
@@ -181,7 +199,7 @@ function QuizList() {
 
                                         <div style={{ marginTop: '0.5rem', marginBottom: '0.25rem' }}>
                                             <small className="text-muted">
-                                                {getAvailabilityText(quiz.availableDate, quiz.untilDate)} | Due {quiz.dueDate} | {quiz.points}pts | Total questions
+                                                {getAvailabilityText(quiz.availableDate, quiz.untilDate)} | Due {formatDate(quiz.dueDate)} | {quiz.points}pts | Total questions
                                                 
                                             </small>
                                         </div>
