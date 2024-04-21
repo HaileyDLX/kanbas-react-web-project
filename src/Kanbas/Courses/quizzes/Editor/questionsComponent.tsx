@@ -1,14 +1,10 @@
 
-import { IoIosArrowDown } from "react-icons/io";
-import { FaCheckCircle, FaEllipsisV, FaRocket, FaEyeSlash } from "react-icons/fa";
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {deleteQuestion, setQuestion, setQuestions, updateQuestion} from "./reducer";
+import {setQuestions} from "./reducer";
 import {KanbasState} from "../../../store";
  import * as client from "./client";
-import {setQuizzes} from "../reducer";
-import {setModule} from "../../Modules/reducer";
 
 function QuestionsComponent() {
   const {quizId} = useParams();
@@ -36,6 +32,9 @@ function QuestionsComponent() {
                             <li key={index} className="list-group-item">
                                 <h3>{question.title}</h3>
                                 <p>{question.type} Question | {question.points} pts</p>
+                                <Link to={`/Kanbas/Courses/${quizId}/question/editor/${question._id}`}>
+                                    <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Edit</button><br />
+                                </Link>
                             </li>
                         ))
                 ) : (
