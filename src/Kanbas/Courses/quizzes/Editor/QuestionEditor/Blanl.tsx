@@ -6,7 +6,7 @@ import { updateQuestion, addQuestion } from "../reducer";
 import * as client from "../client";
 function Blank(){
     const dispatch = useDispatch();
-    const { quizId, questionId } = useParams();
+    const { cid,quizId, questionId } = useParams();
     const navigate = useNavigate();
     const [question, setQuestion] = useState({
         _id: "",
@@ -69,6 +69,7 @@ function Blank(){
                 dispatch(addQuestion({
                     ...questionWithId,
                 }));
+                navigate(`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`);
             });
         } else {
             const questionToUpdate = {
@@ -81,6 +82,7 @@ function Blank(){
                     ...updatedQuestion,
                     _id: questionId,
                 }));
+                navigate(`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`);
             });
         }
     };
@@ -190,7 +192,7 @@ function Blank(){
             <hr/>
 
             <button onClick={handleSave} className="btn btn-success m-2 ">Save Question</button>
-            <Link to={`/Kanbas/Courses/${quizId}/question/editor`}
+            <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`}
                   className="btn btn-danger m-2 float-end">
                 Cancel
             </Link>

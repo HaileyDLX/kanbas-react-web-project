@@ -7,7 +7,7 @@ import * as client from "../client";
 
 function Multiple() {
     const dispatch = useDispatch();
-    const { quizId, questionId } = useParams();
+    const { cid,quizId, questionId } = useParams();
     const navigate = useNavigate();
     const [question, setQuestion] = useState({
         title: "new question",
@@ -103,7 +103,7 @@ function Multiple() {
                 dispatch(addQuestion({
                     ...questionWithId,
                 }));
-                //navigate(`/Kanbas/Courses/${quizId}/quizzes`);
+                navigate(`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`);
             }).catch((error) => {
                 console.error("Failed to create a new question:", error);
             });
@@ -118,7 +118,7 @@ function Multiple() {
                     ...updatedQuestion,
                     _id: questionId,
                 }));
-                //navigate(`/Kanbas/Courses/${quizId}/quizzes`);
+                navigate(`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`);
             });
         }
     };
@@ -149,8 +149,8 @@ function Multiple() {
                         value={newQuestion.points}
                         name="points"
                         className="form-control"
-                        placeholder="Enter points here"
-                        style={{maxWidth: "50px"}}
+                        placeholder="points"
+                        style={{maxWidth: "100px"}}
                     />
                 </div>
             </div>
@@ -211,7 +211,7 @@ function Multiple() {
             <hr/>
 
             <button onClick={handleSave} className="btn btn-success m-2 ">Save Question</button>
-            <Link to={`/Kanbas/Courses/${quizId}/question/editor`}
+            <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`}
                   className="btn btn-danger m-2 float-end">
                 Cancel
             </Link>
