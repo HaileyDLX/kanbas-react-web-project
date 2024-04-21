@@ -1,3 +1,4 @@
+
 import { IoIosArrowDown } from "react-icons/io";
 import { FaCheckCircle, FaEllipsisV, FaRocket, FaEyeSlash } from "react-icons/fa";
 import React, { useEffect, useState, useRef } from "react";
@@ -11,6 +12,7 @@ import {setModule} from "../../Modules/reducer";
 
 function QuestionsComponent() {
   const {quizId} = useParams();
+  const { cid } = useParams();
   const dispatch = useDispatch();
 
     useEffect(() => {
@@ -47,6 +49,7 @@ function QuestionsComponent() {
                 alignItems: 'center',
                 padding: '20px',
             }}>
+                <Link to={`/Kanbas/Courses/${quizId}/question/editor/new`}>
                 <button style={{
                     padding: '10px 15px',
                     border: '1px solid #ccc',
@@ -56,7 +59,7 @@ function QuestionsComponent() {
                 }}>
                     + New Question
                 </button>
-
+                </Link>
             </div>
             <hr />
             <div style={{
