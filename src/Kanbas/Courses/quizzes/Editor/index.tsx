@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
+import { useNavigate, useParams, Link, useLocation, Routes, Route } from "react-router-dom";
 import DetailsComponent from "./detailsComponent";
 import QuestionsComponent from "./questionsComponent";
 import { FaEllipsisV, } from "react-icons/fa";
@@ -8,6 +8,7 @@ import './index.css';
 import { updateQuiz, addQuiz } from "../reducer";
 import * as client from "../client";
 import { addAssignment, updateAssignment } from "../../Assignments/reducer";
+import QuestionEditor from "./QuestionEditor";
 
 function QuizEditor() {
     const [activeTab, setActiveTab] = useState('details');
@@ -138,6 +139,9 @@ function QuizEditor() {
             <div className="content">
                 {activeTab === 'details' && <DetailsComponent/>}
                 {activeTab === 'questions' && <QuestionsComponent/>}
+            </div>
+            <div>
+               
             </div>
         </div>
     );

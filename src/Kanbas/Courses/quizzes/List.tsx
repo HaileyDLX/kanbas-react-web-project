@@ -218,7 +218,7 @@ function QuizList() {
                                         {/* Conditionally rendered dropdown menu */}
                                         {menuVisible[quiz._id] && (
                                             <div ref={(el) => (menuRefs.current[quiz._id] = el)} className="context-menu" style={{ display: 'flex' }}>
-                                                <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}>
+                                               <Link to={`/Kanbas/Courses/${cid}/quizzes/editor/${quiz._id}`}>
                                                     <button style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Edit</button><br />
                                                 </Link>
                                                 <button onClick={() => handleDeleteQuiz(quiz._id)} style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '5px', marginRight: '5px' }}>Delete</button>< br />

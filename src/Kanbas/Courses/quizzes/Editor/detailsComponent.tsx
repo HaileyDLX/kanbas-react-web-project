@@ -1,11 +1,18 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
+import { useNavigate, useParams, Link, useLocation, Routes, Route } from "react-router-dom";
+
+import QuestionsComponent from "./questionsComponent";
+import { FaEllipsisV, } from "react-icons/fa";
 import './index.css';
 import { updateQuiz, addQuiz } from "../reducer";
 import * as client from "../client";
+import { addAssignment, updateAssignment } from "../../Assignments/reducer";
+import QuestionEditor from "./QuestionEditor";
 
 function DetailsComponent() {
+    const [activeTab, setActiveTab] = useState('details');
     const dispatch = useDispatch();
     const navigator = useNavigate();
     const { cid } = useParams();
@@ -399,6 +406,7 @@ function DetailsComponent() {
               className="btn btn-danger m-2 float-end">
             Cancel
         </Link>
+       
     </div>
 }
 
