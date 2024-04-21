@@ -7,7 +7,6 @@ import QuizPreview from "./Preview";
 export default function Quizzes() {
     return (
         <div className="container-fluid">
-            <h1>Quizzes111</h1>
             
             <div>
             <Routes>
