@@ -1,4 +1,4 @@
-import { useParams,Routes,Route,Navigate, useLocation } from "react-router-dom";
+import { useParams, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -15,12 +15,13 @@ import Quizzes from "./quizzes";
 import QuizDetails from "./quizzes/Details";
 import QuizEditor from "./quizzes/Editor";
 import QuestionEditor from "./quizzes/Editor/QuestionEditor";
+import QuizList from "./quizzes/List";
 const API_BASE = process.env.REACT_APP_API_BASE;
 function Courses() {
-    const {cid} =useParams();
+    const { cid } = useParams();
     const COURSES_API = `${API_BASE}/api/courses`;
     //const COURSES_API = "https://kanbas-node-server-app.onrender.com/api/courses";
-   // const COURSES_API = "http://localhost:4000/api/courses";
+    // const COURSES_API = "http://localhost:4000/api/courses";
     const [course, setCourse] = useState<any>({ _id: "" });
     const findCourseById = async (cid?: string) => {
         const response = await axios.get(
@@ -46,30 +47,32 @@ function Courses() {
             {/*    style={{color: '#737373'}}>{' > '}</span><span*/}
             {/*    style={{color: '#000000'}}>{lastPathSegment}</span>*/}
             {/*</h3>*/}
-            <h3 style={{color: '#FF0000FF', fontWeight: 600}}>
-                <HiMiniBars3/> Course {course?.name}
+            <h3 style={{ color: '#FF0000FF', fontWeight: 600 }}>
+                <HiMiniBars3 /> Course {course?.name}
             </h3>
 
 
-            <hr/>
-            <CourseNavigation/>
+            <hr />
+            <CourseNavigation />
             <div>
                 <div
                     className="overflow-y-scroll position-fixed bottom-0 end-0"
-                    style={{left: "320px", top: "50px"}}>
+                    style={{ left: "320px", top: "50px" }}>
                     <Routes>
-                        <Route path="/" element={<Navigate to="Home"/>}/>
-                        <Route path="Home" element={<Home/>}/>
-                        <Route path="Modules" element={<Modules/>}/>
-                        <Route path="Piazza" element={<h1>Piazza</h1>}/>
-                        <Route path="Assignments" element={<Assignments/>}/>
-                        <Route path="Quizzes" element={<Quizzes/>}/>
-                        <Route path="Quizzes/details/:quizId" element={<QuizDetails/>}/>
-                        <Route path="Quizzes/editor/:quizId" element = {<QuizEditor/>}/>
-                        <Route path="Question/editor/:questionId" element={<QuestionEditor/>}/>
+                        <Route path="/" element={<Navigate to="Home" />} />
+                        <Route path="Home" element={<Home />} />
+                        <Route path="Modules" element={<Modules />} />
+                        <Route path="Piazza" element={<h1>Piazza</h1>} />
+                        <Route path="Assignments" element={<Assignments />} />
+                        <Route path="Quizzes/*" element={<Quizzes />}>
+                           
+                           
+                        </Route>
 
-                        <Route path="Assignments/:assignmentId" element={<AssignmentEditor/>}/>
-                        <Route path="Grades" element={<Grades/>}/>
+
+
+                        <Route path="Assignments/:assignmentId" element={<AssignmentEditor />} />
+                        <Route path="Grades" element={<Grades />} />
 
                     </Routes>
                 </div>

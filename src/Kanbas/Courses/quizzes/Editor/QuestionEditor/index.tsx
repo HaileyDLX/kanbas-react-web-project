@@ -30,7 +30,7 @@ function QuestionEditor() {
                 {activeTab === 'True/False' && <TF />}
                 {activeTab === 'Fill in the Blank' && <Blank />}
             </div>
-            \
+            
         </>
     )
 }
