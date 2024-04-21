@@ -3,13 +3,20 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import * as client from "../client";
 import { FaEllipsisV, FaEyeSlash } from "react-icons/fa";
-
+import * as questionClient from"../Editor/client";
+import { setQuestions } from "../Editor/reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { KanbasState } from "../../../store";
 
 function QuizDetails() {
     const { cid, quizId } = useParams();
     console.log("quizId", quizId);
     const [quiz, setQuiz] = useState({ _id: "", title: "", quizType: "", points: 0, assignmentGroup: "", shuffleAnswers: false, timeLimit: 0, multipleAttempts: false, showCorrectAnswers: false, accessCode: "", oneQuestionAtATime: false, webcamRequired: false, lockQuestionsAfterAnswering: false, dueDate: "", availableDate: "", untilDate: "", published: false });
-    const navigate = useNavigate(); const fetchQuiz = async () => {
+    const navigate = useNavigate(); 
+    const dispatch = useDispatch();
+    const questions = useSelector<KanbasState>(state => state.questionReducer.questions);
+    const [questionCounts, setQuestionCounts] = useState<{ [key: string]: number }>({});
+    const fetchQuiz = async () => {
         try {
             if (quizId === "new") {
                 setQuiz({
@@ -34,6 +41,7 @@ function QuizDetails() {
             } else {
                 const account = await client.getQuizById(quizId);
                 setQuiz(account);
+                fetchQuestionCount(quizId); 
             }
         } catch (error: any) {
             if (error.response && error.response.status === 401) {
@@ -43,8 +51,22 @@ function QuizDetails() {
             }
         }
     };
-
-
+    const fetchQuestionCount = async (quizId: any) => {
+        try {
+            const questions = await questionClient.findQuestionsForQuiz(quizId);
+            dispatch(setQuestions(questions));
+            setQuestionCounts(prev => ({
+                ...prev,
+                [quizId]: questions.length
+            }));
+        } catch (error) {
+            console.error("Failed to fetch questions:", error);
+            setQuestionCounts(prev => ({
+                ...prev,
+                [quizId]: 0
+            }));
+        }
+    };
     useEffect(() => {
         fetchQuiz();
     }, []);
@@ -114,6 +136,10 @@ function QuizDetails() {
                     <tr>
                         <th style={{ textAlign: 'right', paddingRight: '15px' }}>Points</th>
                         <td>{quiz.points}</td>
+                    </tr>
+                    <tr>
+                    <th style={{ textAlign: 'right', paddingRight: '15px' }}>Total questions:</th>
+                        <td>{questionCounts[quiz._id] || 0}</td>
                     </tr>
                     <tr>
                         <th style={{ textAlign: 'right', paddingRight: '15px' }}>Assignment Group</th>

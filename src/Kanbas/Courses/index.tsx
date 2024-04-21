@@ -12,7 +12,7 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import Quizzes from "./quizzes";
-import QuizDetails from "./quizzes/Details";
+
 import QuizEditor from "./quizzes/Editor";
 import QuestionEditor from "./quizzes/Editor/QuestionEditor";
 import QuizList from "./quizzes/List";
