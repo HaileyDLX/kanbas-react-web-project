@@ -1,17 +1,8 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import * as client from "../client";
-
-import { KanbasState } from "../../../store";
 import { FaEllipsisV, FaEyeSlash} from "react-icons/fa";
-import {
-    addQuiz,
-    deleteQuiz,
-    updateQuiz,
-    setQuiz,
-    setQuizzes,
-} from "../reducer";
+
 
 function QuizDetails() {
     const { cid,quizId} = useParams();
@@ -34,9 +25,9 @@ function QuizDetails() {
                     oneQuestionAtATime: true,
                     webcamRequired: false,
                     lockQuestionsAfterAnswering: false,
-                    dueDate: "",
-                    availableDate: "",
-                    untilDate: "",
+                    dueDate: "2024-04-25T00:00:00.000+00:00",
+                    availableDate: "2024-04-25T00:00:00.000+00:00",
+                    untilDate: "2024-04-25T00:00:00.000+00:00",
                     published: false 
                 });
             } else {
@@ -56,6 +47,7 @@ function QuizDetails() {
     useEffect(() => {
         fetchQuiz();
     }, []);
+
     const togglePublishStatus = async () => {
         const updatedStatus = !quiz.published;
         try {

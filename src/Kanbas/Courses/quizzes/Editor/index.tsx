@@ -28,9 +28,9 @@ function QuizEditor() {
         oneQuestionAtATime: true,
         webcamRequired: false,
         lockQuestionsAfterAnswering: false,
-        dueDate: "",
-        availableDate: "",
-        untilDate: ""
+        dueDate: "2024-04-25T00:00:00.000+00:00",
+        availableDate: "2024-04-25T00:00:00.000+00:00",
+        untilDate: "2024-04-25T00:00:00.000+00:00"
     });
 
     useEffect(() => {
@@ -54,9 +54,9 @@ function QuizEditor() {
                     oneQuestionAtATime: true,
                     webcamRequired: false,
                     lockQuestionsAfterAnswering: false,
-                    dueDate: "",
-                    availableDate: "",
-                    untilDate: ""
+                    dueDate: "2024-04-25T00:00:00.000+00:00",
+                    availableDate: "2024-04-25T00:00:00.000+00:00",
+                    untilDate: "2024-04-25T00:00:00.000+00:00"
                 });
             } else {
                 const fetchedQuiz = await client.getQuizById(quizId);
