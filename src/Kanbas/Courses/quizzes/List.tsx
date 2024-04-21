@@ -11,18 +11,49 @@ import { KanbasState } from "../../store";
 import * as client from "./client";
 import { FaCheckCircle, FaEllipsisV,  FaRocket, FaEyeSlash } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
-
+import * as questionClient from"./Editor/client";
+import { setQuestions } from "./Editor/reducer";
 
 function QuizList() {
     const { cid } = useParams();
+    const dispatch = useDispatch();
+    const quizzes = useSelector<KanbasState>(state => state.quizzesReducer.quizzes); // 使用类型断言确保类型正确
+    const questions = useSelector<KanbasState>(state => state.questionReducer.questions);
+const [questionCounts, setQuestionCounts] = useState<{ [key: string]: number }>({});
+
+
 
     useEffect(() => {
         client.findQuizzesForCourse(cid)
-            .then((quizzes) =>
-                dispatch(setQuizzes(quizzes))
-            );
-    }, [cid]);
+            .then((quizzes) => {
+                dispatch(setQuizzes(quizzes));
+                quizzes.forEach((quiz: { _id: any; }) => {
+                    fetchQuestionCount(quiz._id);
+                });
+            });
+    }, [cid, dispatch]);
+   
+    
 
+    
+
+    const fetchQuestionCount = async (quizId: any) => {
+        try {
+            const questions = await questionClient.findQuestionsForQuiz(quizId);
+            dispatch(setQuestions(questions));
+            setQuestionCounts(prev => ({
+                ...prev,
+                [quizId]: questions.length
+            }));
+        } catch (error) {
+            console.error("Failed to fetch questions:", error);
+            setQuestionCounts(prev => ({
+                ...prev,
+                [quizId]: 0
+            }));
+        }
+    };
+    
     const handleDeleteQuiz = (quizId: string) => {
         client.deleteQuiz(quizId).then((status: any) => {
             dispatch(deleteQuiz(quizId));
@@ -41,7 +72,7 @@ function QuizList() {
     const quizList = useSelector((state: KanbasState) =>
         state.quizzesReducer.quizzes);
 
-    const dispatch = useDispatch();
+    
 
     const getAvailabilityText = (availableDate: any, untilDate: any) => {
         const currentDate = new Date();
@@ -106,6 +137,7 @@ function QuizList() {
                 // 更新Redux中的测验列表
                 dispatch(setQuizzes(quizzes));
                 // 初始化publish状态
+                
                 setPublishStates(quizzes.reduce((acc: any, quiz: any) => ({
                     ...acc,
                     [quiz._id]: quiz.published,
@@ -199,7 +231,7 @@ function QuizList() {
 
                                         <div style={{ marginTop: '0.5rem', marginBottom: '0.25rem' }}>
                                             <small className="text-muted">
-                                                {getAvailabilityText(quiz.availableDate, quiz.untilDate)} | Due {formatDate(quiz.dueDate)} | {quiz.points}pts | Total questions
+                                                {getAvailabilityText(quiz.availableDate, quiz.untilDate)} | Due {formatDate(quiz.dueDate)} | {quiz.points}pts | Total questions: {questionCounts[quiz._id] || 0}
                                                 
                                             </small>
                                         </div>
