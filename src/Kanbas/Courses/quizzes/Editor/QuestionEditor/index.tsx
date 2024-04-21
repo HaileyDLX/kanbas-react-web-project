@@ -4,9 +4,6 @@ import Multiple from "./Multiple";
 import TF from "./TF";
 import Blank from "./Blanl";
 import React, { useEffect, useState } from "react";
-import { useDispatch} from "react-redux";
-import {useParams} from "react-router-dom";
-import * as client from "../client";
 
 function QuestionEditor() {
 

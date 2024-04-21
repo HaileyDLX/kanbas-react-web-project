@@ -1,15 +1,11 @@
 
-import { IoIosArrowDown } from "react-icons/io";
-import { FaCheckCircle, FaEllipsisV, FaRocket, FaEyeSlash } from "react-icons/fa";
-import React, { useEffect, useState, useRef } from "react";
-import { Link, Route, Routes, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Routes, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {deleteQuestion, setQuestion, setQuestions, updateQuestion} from "./reducer";
+import {setQuestions} from "./reducer";
 import {KanbasState} from "../../../store";
  import * as client from "./client";
-import {setQuizzes} from "../reducer";
-import {setModule} from "../../Modules/reducer";
-import QuestionEditor from "./QuestionEditor";
+
 
 function QuestionsComponent() {
   const {quizId} = useParams();

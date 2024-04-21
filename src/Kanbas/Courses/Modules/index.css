@@ -11,7 +11,7 @@
 }
 
 .wd-modules > li {
-  background-color: lightgray;
+  background-color: #ddd5d5;
   border: 1px solid gray !important;
   border-left: none !important;
 }
