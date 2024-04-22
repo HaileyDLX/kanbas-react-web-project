@@ -14,7 +14,6 @@ function QuizDetails() {
     const [quiz, setQuiz] = useState({ _id: "", title: "", quizType: "", points: 0, assignmentGroup: "", shuffleAnswers: false, timeLimit: 0, multipleAttempts: false, showCorrectAnswers: false, accessCode: "", oneQuestionAtATime: false, webcamRequired: false, lockQuestionsAfterAnswering: false, dueDate: "", availableDate: "", untilDate: "", published: false });
     const navigate = useNavigate(); 
     const dispatch = useDispatch();
-    const questions = useSelector<KanbasState>(state => state.questionReducer.questions);
     const [questionCounts, setQuestionCounts] = useState<{ [key: string]: number }>({});
     const fetchQuiz = async () => {
         try {
