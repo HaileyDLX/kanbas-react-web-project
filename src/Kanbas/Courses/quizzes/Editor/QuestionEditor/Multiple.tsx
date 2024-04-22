@@ -98,11 +98,11 @@ function Multiple() {
 
         if (questionId === 'new') {
             console.log("Creating new question:", questionToSave);
-            const tempId = new Date().getTime().toString();  // 确保ID是独一无二的
-            const questionWithId = { ...questionToSave, id: tempId }; // 也可以考虑后端生成ID
-            client.createQuestion(quizId,questionWithId).then((questionWithId) => {
+            //const tempId = new Date().getTime().toString();  // 确保ID是独一无二的
+            //const questionWithId = { ...questionToSave, id: tempId }; // 也可以考虑后端生成ID
+            client.createQuestion(quizId,questionToSave).then((questionToSave) => {
                 dispatch(addQuestion({
-                    ...questionWithId,
+                    ...questionToSave,
                 }));
                 navigate(`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`);
             }).catch((error) => {
