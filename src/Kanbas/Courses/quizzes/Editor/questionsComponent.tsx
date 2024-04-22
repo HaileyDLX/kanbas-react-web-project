@@ -42,7 +42,7 @@ function QuestionsComponent() {
         }
     };
     const togglePublishStatus = async () => {
-        const updatedStatus = quiz.published;
+        const updatedStatus = true;
         try {
             const updatedQuiz = { ...quiz, published: updatedStatus };
             await quizclient.updateQuiz(updatedQuiz); // 假设这个函数处理 API 请求
@@ -105,7 +105,7 @@ function QuestionsComponent() {
                     <input type="checkbox"/> Notify users this quiz has changed
                 </label>
                 <div> <Link to={`/Kanbas/Courses/${cid}/quizzes/details/${quizId}`}>
-                    <button  onClick={togglePublishStatus} style={{
+                    <button   style={{
                         padding: '5px 15px',
                         border: '1px solid #ccc',
                         background: '#fff',
@@ -115,7 +115,7 @@ function QuestionsComponent() {
                     </button>
                     </Link>
                     <Link to={`/Kanbas/Courses/${cid}/quizzes/details/${quizId}`}>
-                    <button style={{
+                    <button  onClick={togglePublishStatus} style={{
                         padding: '5px 15px',
                         border: '1px solid #ccc',
                         background: '#fff',
