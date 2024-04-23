@@ -1,11 +1,18 @@
+
 import * as client from "./client";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
 export default function Profile() {
-    const [profile, setProfile] = useState({ username: "", password: "",
-        firstName: "", lastName: "", dob: "", email: "", role: "USER" });
+    const [profile, setProfile] = useState({
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        dob: "",
+        email: "",
+        role: "USER" });
     const navigate = useNavigate();
     const fetchProfile = async () => {
         try{
@@ -19,6 +26,7 @@ export default function Profile() {
                 alert("An error occurred while signing in. Please try again later.");
             }
         }
+
 
 
     };
@@ -36,7 +44,23 @@ export default function Profile() {
 
         navigate("/Kanbas/Account/Signin");
     };
+    function formatDate(isoString: string): string {
+        const date = new Date(isoString);
 
+        // Extract date components directly as numbers
+        let month = date.getUTCMonth() + 1; // getUTCMonth returns 0-11
+        let day = date.getUTCDate();
+        const year = date.getUTCFullYear();
+
+
+
+        // Format month, day, hours, and minutes to ensure two digits
+        const monthFormatted = month < 10 ? '0' + month : month.toString();
+        const dayFormatted = day < 10 ? '0' + day : day.toString();
+
+
+        return `${year}-${monthFormatted}-${dayFormatted}`;
+    }
 
     return (
         <div>
@@ -67,7 +91,7 @@ export default function Profile() {
                            value={profile.lastName} onChange={(e) =>
                         setProfile({...profile, lastName: e.target.value})}/>
                     <input style={{width: '300px'}} className="input-field form-control m-1"
-                           value={profile.dob} type="date" onChange={(e) =>
+                           value={formatDate(profile.dob)} type="date" onChange={(e) =>
                         setProfile({...profile, dob: e.target.value})}/>
                     <input style={{width: '300px'}} className="input-field form-control m-1"
                            value={profile.email} onChange={(e) =>

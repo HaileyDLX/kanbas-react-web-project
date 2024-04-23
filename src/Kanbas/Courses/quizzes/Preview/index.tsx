@@ -117,11 +117,16 @@ function QuizPreview() {
                                            style={{margin: '20'}}>{question.points} pts</p>
 
                                     </div>
+                                     {/*<p style={{*/}
+                                    {/*    paddingLeft: '20px',*/}
+                                    {/*    maxWidth: '600px',*/}
+                                    {/*    margin: '20px auto'*/}
+                                    {/*}}>{question.question}</p>*/}
                                     <p style={{
                                         paddingLeft: '20px',
                                         maxWidth: '600px',
                                         margin: '20px auto'
-                                    }}>{question.question}</p>
+                                    }} dangerouslySetInnerHTML={{__html: question.question}}/>
                                     <hr/>
                                     {renderPreview(question)}
 

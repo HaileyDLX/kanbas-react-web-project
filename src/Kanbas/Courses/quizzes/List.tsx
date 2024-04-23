@@ -231,7 +231,7 @@ const [questionCounts, setQuestionCounts] = useState<{ [key: string]: number }>(
 
                                         <div style={{ marginTop: '0.5rem', marginBottom: '0.25rem' }}>
                                             <small className="text-muted">
-                                                {getAvailabilityText(quiz.availableDate, quiz.untilDate)} | Due {formatDate(quiz.dueDate)} | {quiz.points}pts | Total questions: {questionCounts[quiz._id] || 0}
+                                            {getAvailabilityText(quiz.availableDate, quiz.untilDate)} | Due {formatDate(quiz.dueDate)} | {quiz.points}pts | {questionCounts[quiz._id] || 0 } Questions
                                                 
                                             </small>
                                         </div>
