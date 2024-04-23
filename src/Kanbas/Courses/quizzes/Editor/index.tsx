@@ -118,7 +118,7 @@ function QuizEditor() {
     return (
         <div>
             <div className="d-flex justify-content-end">
-                <label>Points</label>
+                <label>Points: 18</label>
                 <label>Not Published</label>
                 <button><FaEllipsisV/></button>
                 <br/>

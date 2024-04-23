@@ -1,12 +1,11 @@
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'
 
 import React, { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
 import { useNavigate, useParams, Link} from "react-router-dom";
 import { updateQuestion, addQuestion } from "../reducer";
 import * as client from "../client";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'
 
 function Multiple() {
     const dispatch = useDispatch();
@@ -100,11 +99,11 @@ function Multiple() {
 
         if (questionId === 'new') {
             console.log("Creating new question:", questionToSave);
-            const tempId = new Date().getTime().toString();  // 确保ID是独一无二的
-            const questionWithId = { ...questionToSave, id: tempId }; // 也可以考虑后端生成ID
-            client.createQuestion(quizId,questionWithId).then((questionWithId) => {
+            //const tempId = new Date().getTime().toString();  // 确保ID是独一无二的
+            //const questionWithId = { ...questionToSave, id: tempId }; // 也可以考虑后端生成ID
+            client.createQuestion(quizId,questionToSave).then((questionToSave) => {
                 dispatch(addQuestion({
-                    ...questionWithId,
+                    ...questionToSave,
                 }));
                 navigate(`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`);
             }).catch((error) => {
@@ -149,7 +148,7 @@ function Multiple() {
                        className="col-sm-3 col-form-label">pts:</label>
                 <div className="col-sm-9">
                     <input
-                        type="number"
+                    type="number"
                         onChange={handleQuestionChange}
                         value={newQuestion.points}
                         name="points"
@@ -179,7 +178,8 @@ function Multiple() {
                             handleQuestionChange(event);
                         }}
                         className="form-control"
-                        style={{ maxWidth: "900px" }}
+                        
+                        style={{maxWidth: "900px"}}
                     />
                 </div>
             </div>
