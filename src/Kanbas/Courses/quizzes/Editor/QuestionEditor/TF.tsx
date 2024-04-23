@@ -11,7 +11,6 @@ function TF(){
     const { cid, quizId, questionId } = useParams();
     const navigate = useNavigate();
     const [question, setQuestion] = useState({
-        _id: "",
         title: "new question",
         points: "",
         type: "True/false",
@@ -28,7 +27,6 @@ function TF(){
         try {
             if (questionId === "new") {
                 setQuestion({
-                    _id: "",
                     title: "new question",
                     points: "",
                     type: "True/false",
@@ -65,13 +63,16 @@ function TF(){
         };
 
         if (questionId === 'new') {
-            const tempId = new Date().getTime().toString();
-            const questionWithId = { ...questionToSave, id: tempId }; // 使用 questionToSave 包含已更新的 type
-            client.createQuestion(quizId, questionWithId).then((questionWithId) => {
+            console.log("Creating new question:", questionToSave);
+            //const tempId = new Date().getTime().toString();  // 确保ID是独一无二的
+            //const questionWithId = { ...questionToSave, id: tempId }; // 也可以考虑后端生成ID
+            client.createQuestion(quizId,questionToSave).then((questionToSave) => {
                 dispatch(addQuestion({
-                    ...questionWithId,
+                    ...questionToSave,
                 }));
                 navigate(`/Kanbas/Courses/${cid}/quizzes/editor/${quizId}`);
+            }).catch((error) => {
+                console.error("Failed to create a new question:", error);
             });
         } else {
             const questionToUpdate = {

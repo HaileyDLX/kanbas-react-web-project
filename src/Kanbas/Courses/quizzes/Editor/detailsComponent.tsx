@@ -277,7 +277,7 @@ function DetailsComponent() {
                     className="form-control"
                     onChange={handleChange}
                     style={{maxWidth: "100px"}}
-                    readOnly={true}
+                    // readOnly={true}
                 />
             </div>
         </div>
