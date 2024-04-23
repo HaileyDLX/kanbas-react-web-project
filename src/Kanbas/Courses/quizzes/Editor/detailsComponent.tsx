@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, Link, useLocation, Routes, Route } from "react-router-dom";
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import QuestionsComponent from "./questionsComponent";
 import { FaEllipsisV, } from "react-icons/fa";
 import './index.css';
@@ -34,7 +35,8 @@ function DetailsComponent() {
         dueDate: "",
         availableDate: "",
         untilDate: "",
-        published: false
+        published: false,
+        hasTimeLimit: true,
     });
 
     useEffect(() => {
@@ -61,7 +63,8 @@ function DetailsComponent() {
                     dueDate: "",
                     availableDate: "",
                     untilDate: "",
-                    published: false
+                    published: false,
+                    hasTimeLimit: true,
                 });
             } else {
                 const fetchedQuiz = await client.getQuizById(quizId);
@@ -75,13 +78,26 @@ function DetailsComponent() {
 
     const [newQuiz, setNewQuiz] = useState({ ...quiz });
 
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
+    // const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
+    //     const { name, value, type } = e.target;
+    //
+    //     let newValue: string | boolean = value;
+    //
+    //     if (type === "checkbox") {
+    //         newValue = (e.target as HTMLInputElement).checked;
+    //     }
+    //
+    //     setNewQuiz(prevNewQuiz => ({
+    //         ...prevNewQuiz,
+    //         [name]: newValue,
+    //     }));
+    // };
+
+    const handleChange = (e:any) => {
         const { name, value, type } = e.target;
-
-        let newValue: string | boolean = value;
-
+        let newValue = value;
         if (type === "checkbox") {
-            newValue = (e.target as HTMLInputElement).checked;
+            newValue = e.target.checked;
         }
 
         setNewQuiz(prevNewQuiz => ({
@@ -89,6 +105,15 @@ function DetailsComponent() {
             [name]: newValue,
         }));
     };
+
+
+    const handleDescriptionChange = (content: string) => {
+        setNewQuiz(prevNewQuiz => ({
+            ...prevNewQuiz,
+            description: content
+        }));
+    };
+
 
 
 
@@ -115,7 +140,8 @@ function DetailsComponent() {
                 }));
             });
         }
-        navigator(`/Kanbas/Courses/${cid}/quizzes`);
+        navigator(`/Kanbas/Courses/${cid}/quizzes/details/${quizId}`);
+        window.location.reload();
     };
 
     const handleSaveAndPublish = () => {
@@ -169,12 +195,13 @@ function DetailsComponent() {
     }
 
 
-    return <div> {/* Quiz Name */}
+    return <div> {/* Quiz Tittle */}
         <div className="form-group row m-2">
             <label style={{textAlign: 'right', paddingRight: '5px'}}
                    className="col-sm-3 col-form-label">Quiz Name</label>
             <div className="col-sm-9">
                 <input
+                    type="text"
                     name="title"
                     value={newQuiz.title}
                     className="form-control"
@@ -188,13 +215,13 @@ function DetailsComponent() {
             <label style={{textAlign: 'right', paddingRight: '5px'}}
                    className="col-sm-3 col-form-label">Description</label>
             <div className="col-sm-9">
-    <textarea
-        name="description"
-        value={newQuiz.description}
-        className="form-control"
-        onChange={handleChange}
-        style={{maxWidth: "900px"}}
-    />
+                <ReactQuill
+                    value={newQuiz.description}
+                    onChange={handleDescriptionChange}
+                    className="form-control"
+                    style={{maxWidth: "900px"}}
+                    theme="snow"
+                />
             </div>
         </div>
 
@@ -250,6 +277,7 @@ function DetailsComponent() {
                     className="form-control"
                     onChange={handleChange}
                     style={{maxWidth: "100px"}}
+                    readOnly={true}
                 />
             </div>
         </div>
@@ -264,10 +292,17 @@ function DetailsComponent() {
                     name="timeLimit"
                     type="number"
                     value={newQuiz.timeLimit}
-                    className="form-control"
                     onChange={handleChange}
                     style={{maxWidth: "100px"}}
                 />
+                <div>
+                    <input
+                        type="checkbox"
+                        name="enableTimeLimit"
+                        checked={newQuiz.hasTimeLimit}
+                        onChange={handleChange}
+                    /> Time Limit
+                </div>
             </div>
         </div>
 
@@ -406,7 +441,7 @@ function DetailsComponent() {
               className="btn btn-danger m-2 float-end">
             Cancel
         </Link>
-       
+
     </div>
 }
 

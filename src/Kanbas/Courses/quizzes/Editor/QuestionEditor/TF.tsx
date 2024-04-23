@@ -1,10 +1,10 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
 import { useNavigate, useParams, Link} from "react-router-dom";
 import { updateQuestion, addQuestion } from "../reducer";
 import * as client from "../client";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'
 
 function TF(){
     const dispatch = useDispatch();
@@ -95,6 +95,7 @@ function TF(){
             {/* Title */}
             <div>
                 <input
+                    type={"text"}
                     onChange={handleQuestionChange}
                     value={newQuestion.title}
                     name="title"
@@ -109,6 +110,7 @@ function TF(){
                        className="col-sm-3 col-form-label">pts:</label>
                 <div className="col-sm-9">
                     <input
+                        type={"number"}
                         onChange={handleQuestionChange}
                         value={newQuestion.points}
                         name="points"
@@ -124,14 +126,20 @@ function TF(){
 
             {/* Question */}
             <div className="form-group row m-2">
-                <label style={{ paddingRight: '5px'}} className="m-2">Question:</label>
-                <div >
-                    <textarea
-                        onChange={handleQuestionChange}
+                <label style={{paddingRight: '5px'}} className="m-2">Question:</label>
+                <div>
+                    <ReactQuill
                         value={newQuestion.question}
-                        name="question"
+                        onChange={(content, delta, source, editor) => {
+                            const event = {
+                                target: {
+                                    name: 'question',
+                                    value: editor.getHTML(),
+                                }
+                            } as React.ChangeEvent<HTMLTextAreaElement>;
+                            handleQuestionChange(event);
+                        }}
                         className="form-control"
-                        placeholder="Enter your question here"
                         style={{maxWidth: "900px"}}
                     />
                 </div>
@@ -139,7 +147,8 @@ function TF(){
 
             {/* Answers as Dropdown */}
             <div className="form-group row m-2">
-                <label style={{ paddingRight: '5px'}} className="col-sm-3 col-form-label">Answer:</label>
+                <label style={{paddingRight: '5px'}}
+                       className="col-sm-3 col-form-label">Answer:</label>
                 <div>
                     <select
                         className="form-control"

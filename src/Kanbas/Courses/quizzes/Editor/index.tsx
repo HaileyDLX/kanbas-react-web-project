@@ -31,7 +31,8 @@ function QuizEditor() {
         lockQuestionsAfterAnswering: false,
         dueDate: "2024-04-25T00:00:00.000+00:00",
         availableDate: "2024-04-25T00:00:00.000+00:00",
-        untilDate: "2024-04-25T00:00:00.000+00:00"
+        untilDate: "2024-04-25T00:00:00.000+00:00",
+        hasTimeLimit: true,
     });
 
     useEffect(() => {
@@ -57,7 +58,8 @@ function QuizEditor() {
                     lockQuestionsAfterAnswering: false,
                     dueDate: "2024-04-25T00:00:00.000+00:00",
                     availableDate: "2024-04-25T00:00:00.000+00:00",
-                    untilDate: "2024-04-25T00:00:00.000+00:00"
+                    untilDate: "2024-04-25T00:00:00.000+00:00",
+                    hasTimeLimit: true,
                 });
             } else {
                 const fetchedQuiz = await client.getQuizById(quizId);

@@ -1,5 +1,6 @@
 
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'
 import React, { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
 import { useNavigate, useParams, Link} from "react-router-dom";
@@ -117,14 +118,15 @@ function Blank(){
         <div>
             {/* Title */}
             <div>
-                    <input
-                        onChange={handleQuestionChange}
-                        value={newQuestion.title}
-                        name="title"
-                        className="form-control"
-                        placeholder="Enter your question title here"
-                        style={{maxWidth: "200px"}}
-                    />
+                <input
+                    onChange={handleQuestionChange}
+                    type={"text"}
+                    value={newQuestion.title}
+                    name="title"
+                    className="form-control"
+                    placeholder="Enter your question title here"
+                    style={{maxWidth: "200px"}}
+                />
             </div>
             {/* Points */}
             <div className="form-group row m-2 float-end">
@@ -132,6 +134,7 @@ function Blank(){
                        className="col-sm-3 col-form-label">pts:</label>
                 <div className="col-sm-9">
                     <input
+                        type={"number"}
                         onChange={handleQuestionChange}
                         value={newQuestion.points}
                         name="points"
@@ -147,14 +150,20 @@ function Blank(){
 
             {/* Question */}
             <div className="form-group row m-2">
-                <label style={{ paddingRight: '5px'}} className="m-2">Question:</label>
-                <div >
-                    <textarea
-                        onChange={handleQuestionChange}
+                <label style={{paddingRight: '5px'}} className="m-2">Question:</label>
+                <div>
+                    <ReactQuill
                         value={newQuestion.question}
-                        name="question"
+                        onChange={(content, delta, source, editor) => {
+                            const event = {
+                                target: {
+                                    name: 'question',
+                                    value: editor.getHTML(),
+                                }
+                            } as React.ChangeEvent<HTMLTextAreaElement>;
+                            handleQuestionChange(event);
+                        }}
                         className="form-control"
-                        placeholder="Enter your question here"
                         style={{maxWidth: "900px"}}
                     />
                 </div>
@@ -173,7 +182,7 @@ function Blank(){
                                 value={answer}
                                 onChange={(e) => handleAnswerChange(e.target.value, index)}
                                 placeholder="Enter a correct answer"
-                                style={{flex: '1',maxWidth: "300px"}}
+                                style={{flex: '1', maxWidth: "300px"}}
                             />
                             <div className="input-group-append">
                                 <button className="btn btn-danger"
@@ -200,4 +209,6 @@ function Blank(){
 
         </div>
     );
-}export default Blank;
+}
+
+export default Blank;

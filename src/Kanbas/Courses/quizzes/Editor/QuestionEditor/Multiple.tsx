@@ -5,6 +5,8 @@ import { useDispatch} from "react-redux";
 import { useNavigate, useParams, Link} from "react-router-dom";
 import { updateQuestion, addQuestion } from "../reducer";
 import * as client from "../client";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'
 
 function Multiple() {
     const dispatch = useDispatch();
@@ -133,6 +135,7 @@ function Multiple() {
             <div>
                 <input
                     onChange={handleQuestionChange}
+                    type={"text"}
                     value={newQuestion.title}
                     name="title"
                     className="form-control"
@@ -146,6 +149,7 @@ function Multiple() {
                        className="col-sm-3 col-form-label">pts:</label>
                 <div className="col-sm-9">
                     <input
+                        type="number"
                         onChange={handleQuestionChange}
                         value={newQuestion.points}
                         name="points"
@@ -162,14 +166,20 @@ function Multiple() {
             {/* Question */}
             <div className="form-group row m-2">
                 <label style={{ paddingRight: '5px'}} className="m-2">Question:</label>
-                <div >
-                    <textarea
-                        onChange={handleQuestionChange}
+                <div>
+                    <ReactQuill
                         value={newQuestion.question}
-                        name="question"
+                        onChange={(content, delta, source, editor) => {
+                            const event = {
+                                target: {
+                                    name: 'question',
+                                    value: editor.getHTML(),
+                                }
+                            } as React.ChangeEvent<HTMLTextAreaElement>;
+                            handleQuestionChange(event);
+                        }}
                         className="form-control"
-                        placeholder="Enter your question here"
-                        style={{maxWidth: "900px"}}
+                        style={{ maxWidth: "900px" }}
                     />
                 </div>
             </div>
@@ -181,8 +191,7 @@ function Multiple() {
                 <div >
                     {newQuestion.options.map((option, index) => (
                         <div key={index} className="d-flex align-items-center mb-2">
-                            <input
-                                type="text"
+                            <textarea
                                 value={option}
                                 onChange={(e) => handleOptionChange(index, e.target.value)}
                                 className="form-control me-2"
